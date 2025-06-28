@@ -1,0 +1,9 @@
+# Project place file
+/react-lua-test.rbxlx
+
+# Roblox Studio lock files
+/*.rbxlx.lock
+/*.rbxl.lock
+
+# Packages
+/Packages/_Index
