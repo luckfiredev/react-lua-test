@@ -47,8 +47,13 @@ end
 
 local function Modals()
     return React.createElement(Modal, {
-        accentPrimary = Color3.fromHex("#FEC752"),
-        accentSecondary = Color3.fromHex("#FFF0D0"),
+        accent = Color3.fromHex("#FEC752"),
+    }, {
+        b = React.createElement(Button, {
+            Text = "BUTTON",
+            GradientLeft = Color3.fromHex("#1A85FF"),
+            GradientRight = Color3.fromHex("#0FB7FF"),
+        }),
     })
 end
 

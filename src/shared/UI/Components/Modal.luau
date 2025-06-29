@@ -7,15 +7,16 @@ local UIScale = require(ReplicatedStorage.Shared.UI.Components.UIScale)
 
 type ModalProps = {
     accent: Color3,
+    children: any?,
 }
 
-function Modal(props: ModalProps, children: any)
+function Modal(props: ModalProps)
     local Size = Vector2.new(1200, 650)
 
     local h, s, v = Color3.toHSV(props.accent)
     local AccentSecondary = Color3.fromHSV(
         h,
-        math.max(s * 0.5, 0),
+        math.max(s * 0.45, 0),
         math.min(v + (1 - v) * 0.75, 1)
     )
 
@@ -85,6 +86,8 @@ function Modal(props: ModalProps, children: any)
                     },
                     Rotation = 90,
                 }),
+            }, {
+                props.children
             }),
 
             InnerShadow = React.createElement("ImageLabel", {
