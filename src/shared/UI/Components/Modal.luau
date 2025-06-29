@@ -26,12 +26,12 @@ function Modal(props: ModalProps)
                 Image = "rbxassetid://94975287138341",
                 Size = UDim2.new(1, 0, 1, 0),
                 ScaleType = Enum.ScaleType.Tile,
-                TileSize = UDim2.new(0, 45, 0, 45),
+                TileSize = UDim2.new(0, 24, 0, 24),
                 BackgroundTransparency = 1,
                 ImageTransparency = 0.5,
             }, {
                 Radius = React.createElement("UICorner", {
-                    CornerRadius = UDim.new(0, 30),
+                    CornerRadius = UDim.new(0, 40),
                 }),
             }),
 
@@ -59,7 +59,7 @@ function Modal(props: ModalProps)
                     Image = "rbxassetid://140423808725753",
                     Size = UDim2.new(1, 0, 1, 0),
                     ScaleType = Enum.ScaleType.Tile,
-                    TileSize = UDim2.new(0, 20, 0, 20),
+                    TileSize = UDim2.new(0, 16, 0, 16),
                     BackgroundTransparency = 1,
 
                     ImageColor3 = props.accentSecondary,
