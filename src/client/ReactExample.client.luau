@@ -6,6 +6,7 @@ local React = require(ReplicatedStorage.Shared.Packages.react)
 local ReactRoblox = require(ReplicatedStorage.Shared.Packages["react-roblox"])
 
 local Button = require(ReplicatedStorage.Shared.UI.Components.Button)
+local Modal = require(ReplicatedStorage.Shared.UI.Components.Modal)
 
 function PurpleCounterButton()
     local count, setCount = React.useState(0)
@@ -20,7 +21,7 @@ function PurpleCounterButton()
     })
 end
 
-local function MyTestFrame() 
+local function _Buttons() 
     return React.createElement("Frame", {
         AnchorPoint = Vector2.new(0.5, 0.5),
         Position = UDim2.new(0.5, 0, 0.5, 0),
@@ -44,6 +45,13 @@ local function MyTestFrame()
     })
 end
 
+local function Modals()
+    return React.createElement(Modal, {
+        accentPrimary = Color3.fromHex("#FEC752"),
+        accentSecondary = Color3.fromHex("#FFF0D0"),
+    })
+end
+
 local handle = Instance.new("ScreenGui",Players.LocalPlayer.PlayerGui)
 local root = ReactRoblox.createRoot(handle)
-root:render(React.createElement(MyTestFrame, {}, {}))
+root:render(React.createElement(Modals, {}, {}))

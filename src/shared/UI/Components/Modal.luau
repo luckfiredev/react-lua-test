@@ -3,17 +3,20 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 
+local UIScale = require(ReplicatedStorage.Shared.UI.Components.UIScale)
+
 type ModalProps = {
     accentPrimary: Color3,
     accentSecondary: Color3,
-    -- "#FEC752"
 }
 
-function Modal(props: ModalProps)
+function Modal(props: ModalProps, children: any)
+    local Size = Vector2.new(1200, 650)
+
     return React.createElement("Frame", {
         AnchorPoint = Vector2.new(0.5, 0.5),
         Position = UDim2.new(0.5, 0, 0.5, 0),
-        Size = UDim2.new(1, 0, 1, 0),
+        Size = UDim2.new(0, Size.X, 0, Size.Y),
 
         BackgroundTransparency = 1,
     }, {
@@ -51,10 +54,6 @@ function Modal(props: ModalProps)
 
                 BackgroundColor3 = Color3.new(1,1,1)
             }, {
-                Radius = React.createElement("UICorner", {
-                    CornerRadius = UDim.new(0, 30),
-                }),
-
                 Pattern = React.createElement("ImageLabel", {
                     Image = "rbxassetid://140423808725753",
                     Size = UDim2.new(1, 0, 1, 0),
@@ -67,6 +66,10 @@ function Modal(props: ModalProps)
                     Radius = React.createElement("UICorner", {
                         CornerRadius = UDim.new(0, 30),
                     }),
+                }),
+                
+                Radius = React.createElement("UICorner", {
+                    CornerRadius = UDim.new(0, 30),
                 }),
 
                 Gradient = React.createElement("UIGradient", {
@@ -103,6 +106,10 @@ function Modal(props: ModalProps)
 
         Radius = React.createElement("UICorner", {
             CornerRadius = UDim.new(0, 50),
+        }),
+
+        UIScale = React.createElement(UIScale, {
+            MobileScaleMultiplier = 15,
         }),
     })
 end
