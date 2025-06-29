@@ -6,12 +6,18 @@ local React = require(ReplicatedStorage.Shared.Packages.react)
 local UIScale = require(ReplicatedStorage.Shared.UI.Components.UIScale)
 
 type ModalProps = {
-    accentPrimary: Color3,
-    accentSecondary: Color3,
+    accent: Color3,
 }
 
 function Modal(props: ModalProps, children: any)
     local Size = Vector2.new(1200, 650)
+
+    local h, s, v = Color3.toHSV(props.accent)
+    local AccentSecondary = Color3.fromHSV(
+        h,
+        math.max(s * 0.5, 0),
+        math.min(v + (1 - v) * 0.75, 1)
+    )
 
     return React.createElement("Frame", {
         AnchorPoint = Vector2.new(0.5, 0.5),
@@ -23,7 +29,7 @@ function Modal(props: ModalProps, children: any)
         Background = React.createElement("Frame", {
             AutomaticSize = Enum.AutomaticSize.XY,
             Size = UDim2.new(1, 0, 1, 0),
-            BackgroundColor3 = props.accentPrimary,
+            BackgroundColor3 = props.accent,
         }, {
             Pattern = React.createElement("ImageLabel", {
                 Image = "rbxassetid://94975287138341",
@@ -61,7 +67,7 @@ function Modal(props: ModalProps, children: any)
                     TileSize = UDim2.new(0, 16, 0, 16),
                     BackgroundTransparency = 1,
 
-                    ImageColor3 = props.accentSecondary,
+                    ImageColor3 = AccentSecondary,
                 }, {
                     Radius = React.createElement("UICorner", {
                         CornerRadius = UDim.new(0, 30),
@@ -74,7 +80,7 @@ function Modal(props: ModalProps, children: any)
 
                 Gradient = React.createElement("UIGradient", {
                     Color = ColorSequence.new{
-                        ColorSequenceKeypoint.new(0, props.accentSecondary),
+                        ColorSequenceKeypoint.new(0, AccentSecondary),
                         ColorSequenceKeypoint.new(1, Color3.new(1,1,1)),
                     },
                     Rotation = 90,
