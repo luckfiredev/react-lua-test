@@ -61,6 +61,16 @@ function Modal(props: ModalProps)
 
                 BackgroundColor3 = Color3.new(1,1,1)
             }, {
+                InnerShadow = React.createElement("ImageLabel", {
+                    Image = "rbxassetid://108630113994334",
+                    Size = UDim2.new(1, 0, 1, 0),
+                    BackgroundTransparency = 1
+                }, {
+                    Radius = React.createElement("UICorner", {
+                        CornerRadius = UDim.new(0, 30),
+                    }),
+                }),
+
                 Pattern = React.createElement("ImageLabel", {
                     Image = "rbxassetid://140423808725753",
                     Size = UDim2.new(1, 0, 1, 0),
@@ -88,17 +98,6 @@ function Modal(props: ModalProps)
                 }),
             }, {
                 props.children
-            }),
-
-            InnerShadow = React.createElement("ImageLabel", {
-                ZIndex = 100,
-                Image = "rbxassetid://108630113994334",
-                Size = UDim2.new(1, 0, 1, 0),
-                BackgroundTransparency = 1
-            }, {
-                Radius = React.createElement("UICorner", {
-                    CornerRadius = UDim.new(0, 30),
-                }),
             }),
 
             Padding = React.createElement("UIPadding", {

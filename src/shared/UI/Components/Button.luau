@@ -4,22 +4,37 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 local Spr = require(ReplicatedStorage.Shared.Packages.spr)
 
+local Rubik = require(ReplicatedStorage.Shared.UI.Fonts.Rubik)
+
 type ButtonProps = {
-    Text: string,
+    Disabled: boolean?,
+
+    Text: string?,
+    Icon: string?,
+
+    Size: UDim2?,
+
     GradientLeft: Color3,
     GradientRight: Color3,
     OnClick: () -> (),
+
+    children: any,
 }
 
 
 function Button(props: ButtonProps)
+    local Radius = 20
+    local InnerRadius = Radius - 4
+
     local RubikBold = Font.new("rbxassetid://12187365977", Enum.FontWeight.Bold)
 
     local ButtonHoverRef = React.useRef(nil)
     local ButtonScaleRef = React.useRef(nil)
 
+    local ButtonTransparency = props.Disabled and 0.5 or 0
+
     local function HoldClick()
-        if not ButtonScaleRef.current then
+        if props.Disabled or not ButtonScaleRef.current then
             return
         end
 
@@ -29,6 +44,10 @@ function Button(props: ButtonProps)
     end
 
     local function HandleClick()
+        if props.Disabled then
+            return
+        end
+
         if props.OnClick then
             props.OnClick()
         end
@@ -37,25 +56,25 @@ function Button(props: ButtonProps)
             return
         end
 
-        Spr.target(ButtonScaleRef.current, 1, 5, {
-            Scale = 1.1
+        Spr.target(ButtonScaleRef.current, 0.35, 2, {
+            Scale = 1.05
         })
     end
 
     local function HandleHover()
-        if not ButtonScaleRef.current or not ButtonHoverRef.current then
+        if props.Disabled or not ButtonScaleRef.current or not ButtonHoverRef.current then
             return
         end
 
         Spr.target(ButtonScaleRef.current, 1, 5, {
-            Scale = 1.1
+            Scale = 1.05
         })
 
         ButtonHoverRef.current.BackgroundTransparency = 0.85
     end
 
     local function HandleUnhover()
-        if not ButtonScaleRef.current or not ButtonHoverRef.current then
+        if props.Disabled or not ButtonScaleRef.current or not ButtonHoverRef.current then
             return
         end
 
@@ -66,111 +85,151 @@ function Button(props: ButtonProps)
         ButtonHoverRef.current.BackgroundTransparency = 1
     end
 
-    return React.createElement("Frame",{
+    return React.createElement("Frame", {
         AutomaticSize = Enum.AutomaticSize.XY,
-        AnchorPoint = Vector2.new(0.5, 0.5),
-        Position = UDim2.new(0.5, 0, 0.5, 0),
         BackgroundColor3 = Color3.fromHex("#1A1A1A"),
     }, {
-        InnerShadow = React.createElement("ImageLabel", {
-            ZIndex = 100,
-            Image = "rbxassetid://108630113994334",
-            Size = UDim2.new(1, 0, 1, 0),
-            BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-            BackgroundTransparency = 1,
-        }, {
-            Radius = React.createElement("UICorner", {
-                CornerRadius = UDim.new(0, 15),
-            }),
-        }),
-
         Button = React.createElement("TextButton", {
+            ZIndex = 4,
             AutomaticSize = Enum.AutomaticSize.XY,
-            AutoButtonColor = false,
-            BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-            BackgroundTransparency = 0,
 
             Text = "",
+
+            FontFace = Rubik.Bold,
+            TextSize = 36,
+            TextColor3 = Color3.fromRGB(255, 255, 255),
+            TextStrokeColor3 = Color3.fromRGB(0,0,0),
+
+            BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+            BackgroundTransparency = 1,
 
             [React.Event.Activated] = HandleClick,
             [React.Event.MouseButton1Down] = HoldClick,
             [React.Event.MouseEnter] = HandleHover,
             [React.Event.MouseLeave] = HandleUnhover,
         }, {
-            ButtonHover = React.createElement("Frame", {
-                BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+            Content = React.createElement("Frame", {
+                AutomaticSize = Enum.AutomaticSize.XY,
                 BackgroundTransparency = 1,
-                Size = UDim2.new(1, 0, 1, 0),
-
-                ref = ButtonHoverRef,
             }, {
-                Radius = React.createElement("UICorner", {
-                    CornerRadius = UDim.new(0, 15),
-                }),
-            }),
+                Icon = props.Icon and React.createElement("ImageLabel", {
+                    Image = props.Icon,
+                    ImageTransparency = ButtonTransparency,
+                    Size = UDim2.new(0, 36, 0, 36),
+                    BackgroundTransparency = 1,
+                }, {}),
 
-            InnerContent = React.createElement("Frame", {
-                ZIndex = 100,
-                Size = UDim2.new(1, 0, 1, 0),
-                BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-                BackgroundTransparency = 1,
-           }, {
-                Text = React.createElement("TextLabel", {
+                Text = props.Text and React.createElement("TextLabel", {
                     AutomaticSize = Enum.AutomaticSize.XY,
+
                     Text = props.Text,
                     TextColor3 = Color3.fromRGB(255, 255, 255),
+                    TextTransparency = ButtonTransparency,
                     TextSize = 36,
                     FontFace = RubikBold,
+
                     BackgroundTransparency = 1,
                 }, {
                     Stroke = React.createElement("UIStroke", {
                         Thickness = 2,
                         Color = Color3.fromRGB(0,0,0),
+                        Transparency = ButtonTransparency,
                     }),
                 }),
 
-                Padding = React.createElement("UIPadding", {
-                    PaddingTop = UDim.new(0, 15),
-                    PaddingBottom = UDim.new(0, 12),
-                    PaddingRight = UDim.new(0, 20),
-                    PaddingLeft = UDim.new(0, 20),
-                }),
-
-                LayoutOrder = React.createElement("UIListLayout", {
+                Layout = React.createElement("UIListLayout", {
                     FillDirection = Enum.FillDirection.Horizontal,
+                    HorizontalAlignment = Enum.HorizontalAlignment.Center,
                     Padding = UDim.new(0, 10),
                 }),
             }),
+
+            Padding = props.Text and React.createElement("UIPadding", {
+                PaddingTop = UDim.new(0, 15),
+                PaddingBottom = UDim.new(0, 12),
+                PaddingRight = UDim.new(0, 20),
+                PaddingLeft = UDim.new(0, 20),
+            }),
+
+            PaddingIconOnly = not props.Text and React.createElement("UIPadding", {
+                PaddingTop = UDim.new(0, 15),
+                PaddingBottom = UDim.new(0, 12),
+                PaddingRight = UDim.new(0, 15),
+                PaddingLeft = UDim.new(0, 15),
+            }),
+
             Stroke = React.createElement("UIStroke", {
                 Thickness = 2,
                 Color = Color3.fromRGB(0,0,0),
             }),
+
             Radius = React.createElement("UICorner", {
-                CornerRadius = UDim.new(0, 15),
+                CornerRadius = UDim.new(0, Radius),
             }),
+        }),
+
+        ButtonHover = React.createElement("Frame", {
+            ZIndex = 3,
+            Size = UDim2.new(1, 0, 1, 0),
+            BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+            BackgroundTransparency = 1,
+
+            ref = ButtonHoverRef,
+        }, {
+            Radius = React.createElement("UICorner", {
+                CornerRadius = UDim.new(0, InnerRadius),
+            }),
+        }),
+
+        InnerSahdow = React.createElement("ImageLabel", {
+            ZIndex = 2,
+            Image = "rbxassetid://108630113994334",
+            ImageTransparency = ButtonTransparency,
+            Size = UDim2.new(1, 0, 1, 0),
+            BackgroundTransparency = 1,
+        }, {
+            Radius = React.createElement("UICorner", {
+                CornerRadius = UDim.new(0, InnerRadius),
+            }),
+        }),
+
+        InnerGradient = React.createElement("Frame", {
+            ZIndex = 1,
+            Size = UDim2.new(1, 0, 1, 0),
+            BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+            BackgroundTransparency = ButtonTransparency,
+        }, {
             Gradient = React.createElement("UIGradient", {
                 Color = ColorSequence.new{
                     ColorSequenceKeypoint.new(0, props.GradientLeft),
                     ColorSequenceKeypoint.new(1, props.GradientRight)
                 },
+                Rotation = 75,
+            }),
+
+            Radius = React.createElement("UICorner", {
+                CornerRadius = UDim.new(0, InnerRadius),
             }),
         }),
 
-        Radius = React.createElement("UICorner", {
-            CornerRadius = UDim.new(0, 19),
-        }),
         Padding = React.createElement("UIPadding", {
             PaddingTop = UDim.new(0, 3),
             PaddingBottom = UDim.new(0, 8),
             PaddingRight = UDim.new(0, 3),
-            PaddingLeft = UDim.new(0, 3),
+            PaddingLeft = UDim.new(0, 3)
         }),
 
-        UIScale = React.createElement("UIScale", {
+        Scale = React.createElement("UIScale", {
             Scale = 1,
-
+            
             ref = ButtonScaleRef,
         }),
+
+        Radius = React.createElement("UICorner", {
+            CornerRadius = UDim.new(0, Radius),
+        }),
+    }, {
+        props.children,
     })
 end
 

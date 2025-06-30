@@ -35,6 +35,12 @@ local story = {
                 GradientRight = Color3.fromHex("#0FB7FF"),
             }),
             C = React.createElement(PurpleCounterButton),
+            D = React.createElement(Button, {
+                Disabled = true,
+                Text = "DISABLED",
+                GradientLeft = Color3.fromHex("#CFCFCF"),
+                GradientRight = Color3.fromHex("#717171"),
+            })
         }, {
             LayoutOrder = React.createElement("UIListLayout", {
                 FillDirection = Enum.FillDirection.Horizontal,
