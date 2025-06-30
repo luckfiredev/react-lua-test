@@ -45,7 +45,7 @@ local function ShopCardItem(props: ShopCardItemProps)
     end
     
     return React.createElement("Frame", {
-        Size = UDim2.new(0, Size.X, 0, Size.Y),
+        Size = UDim2.new(0, Size.X, 0, Size.Y+72),
         BackgroundTransparency = 1,
     }, { 
         Content = React.createElement("Frame", {
@@ -152,7 +152,7 @@ local function ShopCardItem(props: ShopCardItemProps)
         }),
 
         Buttons = React.createElement("Frame", {
-            Position = UDim2.new(0, -3, 0.915, 0),
+            Position = UDim2.new(0, -3, 0, Size.Y),
             Size = UDim2.new(1, 6, 0, 72),
             BackgroundTransparency = 1,
         }, {

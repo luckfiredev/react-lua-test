@@ -3,16 +3,12 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 
-local UIScale = require(ReplicatedStorage.Shared.UI.Components.UIScale)
-
 type ModalProps = {
     accent: Color3,
     children: any?,
 }
 
 function Modal(props: ModalProps)
-    local Size = Vector2.new(1200, 650)
-
     local h, s, v = Color3.toHSV(props.accent)
     local AccentSecondary = Color3.fromHSV(
         h,
@@ -21,10 +17,7 @@ function Modal(props: ModalProps)
     )
 
     return React.createElement("Frame", {
-        AnchorPoint = Vector2.new(0.5, 0.5),
-        Position = UDim2.new(0.5, 0, 0.5, 0),
-        Size = UDim2.new(0, Size.X, 0, Size.Y),
-
+        AutomaticSize = Enum.AutomaticSize.XY,
         BackgroundTransparency = 1,
     }, {
         Background = React.createElement("Frame", {
@@ -76,12 +69,25 @@ function Modal(props: ModalProps)
                     Size = UDim2.new(1, 0, 1, 0),
                     ScaleType = Enum.ScaleType.Tile,
                     TileSize = UDim2.new(0, 16, 0, 16),
-                    BackgroundTransparency = 1,
 
-                    ImageColor3 = AccentSecondary,
+                    ImageTransparency = 0.25,
+                    BackgroundTransparency = 1,
                 }, {
                     Radius = React.createElement("UICorner", {
                         CornerRadius = UDim.new(0, 30),
+                    }),
+
+                    Gradient = React.createElement("UIGradient", {
+                        Color = ColorSequence.new{
+                            ColorSequenceKeypoint.new(0, AccentSecondary),
+                            ColorSequenceKeypoint.new(1, Color3.new(1,1,1)),
+                        },
+                        Transparency = NumberSequence.new{
+                            NumberSequenceKeypoint.new(0, 0),
+                            NumberSequenceKeypoint.new(0.75, 1),
+                            NumberSequenceKeypoint.new(1, 1),
+                        },
+                        Rotation = -90,
                     }),
                 }),
                 
@@ -114,10 +120,6 @@ function Modal(props: ModalProps)
 
         Radius = React.createElement("UICorner", {
             CornerRadius = UDim.new(0, 50),
-        }),
-
-        UIScale = React.createElement(UIScale, {
-            MobileScaleMultiplier = 15,
         }),
     })
 end
