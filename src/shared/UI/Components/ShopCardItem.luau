@@ -162,7 +162,7 @@ local function ShopCardItem(props: ShopCardItemProps)
                 BackgroundTransparency = 1,
             }, {
                 Button = React.createElement(Button, {
-                    Size = UDim2.new(1, 0, 1, 0),
+                    Size = UDim2.new(1, -3, 1, 0),
                     Icon = "rbxassetid://124876235625151",
                     Text = FormatNumber(props.ProductPrice),
                     GradientLeft = Color3.fromHex("#1AFFAF"),
@@ -176,7 +176,7 @@ local function ShopCardItem(props: ShopCardItemProps)
                 BackgroundTransparency = 1,
             }, {
                 IconButton = React.createElement(Button, {
-                    Size = UDim2.new(1, 0, 1, 0),
+                    Size = UDim2.new(1, -3, 1, 0),
                     Icon = "rbxassetid://91578590125441",
                     GradientLeft = Color3.fromHex("#941AFF"),
                     GradientRight = Color3.fromHex("#FF0FB7"),
@@ -195,7 +195,7 @@ local function ShopCardItem(props: ShopCardItemProps)
                 HorizontalAlignment = Enum.HorizontalAlignment.Center,
                 HorizontalFlex = Enum.UIFlexAlignment.Fill,
 
-                Padding = UDim.new(0, 5),
+                Padding = UDim.new(0, 3),
             }),
         })
     })

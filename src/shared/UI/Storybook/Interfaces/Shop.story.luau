@@ -11,7 +11,7 @@ local shopItems: { ShopCardItem.ShopCardItemProps } = {
     {
         ProductName = "x2 Cash",
         ProductDescription = "Obtain double the currency to upgrade your tycoon faster!\n* Does not apply to cash purchases.",
-        ProductPrice = 100,
+        ProductPrice = 9999,
 
         GradientTop = Color3.fromHex("#00FE00"),
         GradientBottom = Color3.fromHex("#0FB7FF"),
@@ -19,7 +19,7 @@ local shopItems: { ShopCardItem.ShopCardItemProps } = {
         Purchased = false,
         Giftable = true,
         OnPurchase = function(setPurchased)
-            setPurchased(true)
+            -- setPurchased(true)
         end,
         OnGift = function()
             print("Gift")
@@ -28,7 +28,7 @@ local shopItems: { ShopCardItem.ShopCardItemProps } = {
     {
         ProductName = "Auto Rebirth",
         ProductDescription = "Automatically rebirth when you hit the requirements.\n* Toggleable in Rebirth Menu & Settings.",
-        ProductPrice = 100,
+        ProductPrice = 9999,
 
         GradientTop = Color3.fromHex("#FF41AC"),
         GradientBottom = Color3.fromHex("#FE8C00"),
@@ -36,7 +36,7 @@ local shopItems: { ShopCardItem.ShopCardItemProps } = {
         Purchased = false,
         Giftable = true,
         OnPurchase = function(setPurchased)
-            setPurchased(true)
+            -- setPurchased(true)
         end,
         OnGift = function()
             print("Gift")
