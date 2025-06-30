@@ -109,12 +109,11 @@ function Button(props: ButtonProps)
             [React.Event.MouseLeave] = HandleUnhover,
         }, {
             Content = React.createElement("Frame", {
-                AutomaticSize = if props.Size then Enum.AutomaticSize.None else Enum.AutomaticSize.XY,
-                Size = if props.Size then props.Size else nil,
+                AutomaticSize = Enum.AutomaticSize.XY,
                 BackgroundTransparency = 1,
             }, {
                 Wrapper = React.createElement("Frame", {
-                    AutomaticSize = if props.Size then Enum.AutomaticSize.None else Enum.AutomaticSize.XY,
+                    AutomaticSize = Enum.AutomaticSize.XY,
                     Size = if props.Size then props.Size else nil,
                     BackgroundTransparency = 1,
                 }, {

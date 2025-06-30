@@ -153,13 +153,13 @@ local function ShopCardItem(props: ShopCardItemProps)
 
         Buttons = React.createElement("Frame", {
             Position = UDim2.new(0, -3, 0.915, 0),
-            Size = UDim2.new(0, Size.X+6, 0, 72),
+            Size = UDim2.new(1, 6, 0, 72),
             BackgroundTransparency = 1,
         }, {
             PurchaseButton = not Purchased and React.createElement("Frame", {
                 ZIndex = 2,
                 AutomaticSize = Enum.AutomaticSize.XY,
-                -- BackgroundTransparency = 1,
+                BackgroundTransparency = 1,
             }, {
                 Button = React.createElement(Button, {
                     Size = UDim2.new(1, 0, 1, 0),
@@ -169,65 +169,22 @@ local function ShopCardItem(props: ShopCardItemProps)
                     GradientRight = Color3.fromHex("#3FFF0F"),
                     OnClick = HandlePurchase,
                 }),
-
-                Layout = React.createElement("UIListLayout", {
-                    HorizontalAlignment = Enum.HorizontalAlignment.Center,
-                    VerticalAlignment = Enum.VerticalAlignment.Center,
-                }),
             }),
 
             GiftIconButton = props.Giftable and not Purchased and React.createElement("Frame", {
                 AutomaticSize = Enum.AutomaticSize.XY,
-                -- BackgroundTransparency = 1,
+                BackgroundTransparency = 1,
             }, {
                 IconButton = React.createElement(Button, {
+                    Size = UDim2.new(1, 0, 1, 0),
                     Icon = "rbxassetid://91578590125441",
                     GradientLeft = Color3.fromHex("#941AFF"),
                     GradientRight = Color3.fromHex("#FF0FB7"),
                     OnClick = props.OnGift,
                 }),
 
-                FlexItem = React.createElement("UIFlexItem", {}, {
-                    FlexMode = Enum.UIFlexMode.None
-                }),
-            }),
-
-            -- Already Owned & Giftable
-            GiftButton = props.Giftable and Purchased and React.createElement("Frame", {
-                Size = UDim2.new(1, 0, 1, 0),
-                BackgroundTransparency = 1,
-            }, {
-                Button = Purchased and React.createElement(Button, {
-                    Size = UDim2.new(1, 0, 1, 0),
-                    Text = "GIFT",
-                    Icon = "rbxassetid://91578590125441",
-                    GradientLeft = Color3.fromHex("#941AFF"),
-                    GradientRight = Color3.fromHex("#FF0FB7"),
-                    OnClick = props.OnGift,
-                }),
-
-                Layout = Purchased and React.createElement("UIListLayout", {
-                    HorizontalAlignment = Enum.HorizontalAlignment.Center,
-                    VerticalAlignment = Enum.VerticalAlignment.Center,
-                }),
-            }),
-
-            -- Already Owned & Not Giftable
-            OwnedButton = Purchased and not props.Giftable and React.createElement("Frame", {
-                Size = UDim2.new(1, 0, 1, 0),
-                BackgroundTransparency = 1,
-            }, {
-                Button = Purchased and React.createElement(Button, {
-                    Disabled = true,
-                    Size = UDim2.new(1, 0, 1, 0),
-                    Text = "OWNED",
-                    GradientLeft = Color3.fromHex("#CFCFCF"),
-                    GradientRight = Color3.fromHex("#717171"),
-                    OnClick = props.OnGift,
-                }),
-
-                FlexItem = React.createElement("UIFlexItem", {}, {
-                    FlexMode = Enum.UIFlexMode.None
+                Layout = React.createElement("UIListLayout", {
+                    HorizontalAlignment = Enum.HorizontalAlignment.Right,
                 }),
             }),
 
