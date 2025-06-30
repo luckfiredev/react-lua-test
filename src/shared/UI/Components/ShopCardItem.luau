@@ -152,15 +152,17 @@ local function ShopCardItem(props: ShopCardItemProps)
         }),
 
         Buttons = React.createElement("Frame", {
-            Position = UDim2.new(0, 0, 0.915, 0),
-            Size = UDim2.new(1, 0, 0, 72),
-            -- BackgroundTransparency = 1,
+            Position = UDim2.new(0, -3, 0.915, 0),
+            Size = UDim2.new(0, Size.X+6, 0, 72),
+            BackgroundTransparency = 1,
         }, {
-            Purchase = not Purchased and React.createElement("Frame", {
+            PurchaseButton = not Purchased and React.createElement("Frame", {
+                ZIndex = 2,
                 AutomaticSize = Enum.AutomaticSize.XY,
                 -- BackgroundTransparency = 1,
             }, {
                 Button = React.createElement(Button, {
+                    Size = UDim2.new(1, 0, 1, 0),
                     Icon = "rbxassetid://124876235625151",
                     Text = FormatNumber(props.ProductPrice),
                     GradientLeft = Color3.fromHex("#1AFFAF"),
@@ -169,25 +171,16 @@ local function ShopCardItem(props: ShopCardItemProps)
                 }),
 
                 Layout = React.createElement("UIListLayout", {
-                    FillDirection = Enum.FillDirection.Horizontal,
                     HorizontalAlignment = Enum.HorizontalAlignment.Center,
                     VerticalAlignment = Enum.VerticalAlignment.Center,
                 }),
             }),
 
-            Gift = props.Giftable and React.createElement("Frame", {
+            GiftIconButton = props.Giftable and not Purchased and React.createElement("Frame", {
                 AutomaticSize = Enum.AutomaticSize.XY,
                 -- BackgroundTransparency = 1,
             }, {
-                IconButton = not Purchased and React.createElement(Button, {
-                    Icon = "rbxassetid://91578590125441",
-                    GradientLeft = Color3.fromHex("#941AFF"),
-                    GradientRight = Color3.fromHex("#FF0FB7"),
-                    OnClick = props.OnGift,
-                }),
-
-                Button = Purchased and React.createElement(Button, {
-                    Text = "GIFT",
+                IconButton = React.createElement(Button, {
                     Icon = "rbxassetid://91578590125441",
                     GradientLeft = Color3.fromHex("#941AFF"),
                     GradientRight = Color3.fromHex("#FF0FB7"),
@@ -197,20 +190,36 @@ local function ShopCardItem(props: ShopCardItemProps)
                 FlexItem = React.createElement("UIFlexItem", {}, {
                     FlexMode = Enum.UIFlexMode.None
                 }),
+            }),
 
-                Layout = React.createElement("UIListLayout", {
-                    FillDirection = Enum.FillDirection.Horizontal,
+            -- Already Owned & Giftable
+            GiftButton = props.Giftable and Purchased and React.createElement("Frame", {
+                Size = UDim2.new(1, 0, 1, 0),
+                BackgroundTransparency = 1,
+            }, {
+                Button = Purchased and React.createElement(Button, {
+                    Size = UDim2.new(1, 0, 1, 0),
+                    Text = "GIFT",
+                    Icon = "rbxassetid://91578590125441",
+                    GradientLeft = Color3.fromHex("#941AFF"),
+                    GradientRight = Color3.fromHex("#FF0FB7"),
+                    OnClick = props.OnGift,
+                }),
+
+                Layout = Purchased and React.createElement("UIListLayout", {
                     HorizontalAlignment = Enum.HorizontalAlignment.Center,
                     VerticalAlignment = Enum.VerticalAlignment.Center,
                 }),
             }),
 
-            Owned = Purchased and not props.Giftable and React.createElement("Frame", {
-                AutomaticSize = Enum.AutomaticSize.XY,
+            -- Already Owned & Not Giftable
+            OwnedButton = Purchased and not props.Giftable and React.createElement("Frame", {
+                Size = UDim2.new(1, 0, 1, 0),
                 BackgroundTransparency = 1,
             }, {
                 Button = Purchased and React.createElement(Button, {
                     Disabled = true,
+                    Size = UDim2.new(1, 0, 1, 0),
                     Text = "OWNED",
                     GradientLeft = Color3.fromHex("#CFCFCF"),
                     GradientRight = Color3.fromHex("#717171"),
@@ -219,12 +228,6 @@ local function ShopCardItem(props: ShopCardItemProps)
 
                 FlexItem = React.createElement("UIFlexItem", {}, {
                     FlexMode = Enum.UIFlexMode.None
-                }),
-
-                Layout = React.createElement("UIListLayout", {
-                    FillDirection = Enum.FillDirection.Horizontal,
-                    HorizontalAlignment = Enum.HorizontalAlignment.Center,
-                    VerticalAlignment = Enum.VerticalAlignment.Center,
                 }),
             }),
 

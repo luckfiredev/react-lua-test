@@ -28,8 +28,8 @@ local story = {
             GradientTop = props.controls.GradientTop,
             GradientBottom = props.controls.GradientBottom,
 
-            Purchased = false,
-            Giftable = true,
+            Purchased = true,
+            Giftable = false,
 
             OnPurchase = function(setPurchased)
                 -- setPurchased(true)

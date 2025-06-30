@@ -109,36 +109,51 @@ function Button(props: ButtonProps)
             [React.Event.MouseLeave] = HandleUnhover,
         }, {
             Content = React.createElement("Frame", {
-                AutomaticSize = Enum.AutomaticSize.XY,
+                AutomaticSize = if props.Size then Enum.AutomaticSize.None else Enum.AutomaticSize.XY,
+                Size = if props.Size then props.Size else nil,
                 BackgroundTransparency = 1,
             }, {
-                Icon = props.Icon and React.createElement("ImageLabel", {
-                    Image = props.Icon,
-                    ImageTransparency = ButtonTransparency,
-                    Size = UDim2.new(0, 36, 0, 36),
-                    BackgroundTransparency = 1,
-                }, {}),
-
-                Text = props.Text and React.createElement("TextLabel", {
-                    AutomaticSize = Enum.AutomaticSize.XY,
-
-                    Text = props.Text,
-                    TextColor3 = Color3.fromRGB(255, 255, 255),
-                    TextTransparency = ButtonTransparency,
-                    TextSize = 36,
-                    FontFace = RubikBold,
-
+                Wrapper = React.createElement("Frame", {
+                    AutomaticSize = if props.Size then Enum.AutomaticSize.None else Enum.AutomaticSize.XY,
+                    Size = if props.Size then props.Size else nil,
                     BackgroundTransparency = 1,
                 }, {
-                    Stroke = React.createElement("UIStroke", {
-                        Thickness = 2,
-                        Color = Color3.fromRGB(0,0,0),
-                        Transparency = ButtonTransparency,
+                    Icon = props.Icon and React.createElement("ImageLabel", {
+                        Image = props.Icon,
+                        ImageTransparency = ButtonTransparency,
+                        Size = UDim2.new(0, 36, 0, 36),
+                        BackgroundTransparency = 1,
+                    }, {}),
+
+                    Text = props.Text and React.createElement("TextLabel", {
+                        AutomaticSize = Enum.AutomaticSize.XY,
+
+                        Text = props.Text,
+                        TextColor3 = Color3.fromRGB(255, 255, 255),
+                        TextTransparency = ButtonTransparency,
+                        TextSize = 36,
+                        FontFace = RubikBold,
+
+                        BackgroundTransparency = 1,
+                    }, {
+                        Stroke = React.createElement("UIStroke", {
+                            Thickness = 2,
+                            Color = Color3.fromRGB(0,0,0),
+                            Transparency = ButtonTransparency,
+                        }),
+                    }),
+
+                    Layout = React.createElement("UIListLayout", {
+                        FillDirection = Enum.FillDirection.Horizontal,
+                        VerticalAlignment = Enum.VerticalAlignment.Center,
+                        HorizontalAlignment = Enum.HorizontalAlignment.Center,
+                        Padding = UDim.new(0, 10),
                     }),
                 }),
 
                 Layout = React.createElement("UIListLayout", {
                     FillDirection = Enum.FillDirection.Horizontal,
+                    VerticalAlignment = Enum.VerticalAlignment.Center,
                     HorizontalAlignment = Enum.HorizontalAlignment.Center,
                     Padding = UDim.new(0, 10),
                 }),
