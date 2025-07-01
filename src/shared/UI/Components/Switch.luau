@@ -8,6 +8,8 @@ local useState = React.useState
 
 type SwitchProps = {
     Toggled: boolean,
+
+    OnToggle: () -> (),
 }
 
 function Switch(props: SwitchProps)
@@ -22,7 +24,7 @@ function Switch(props: SwitchProps)
         end
 
         Spr.target(ScaleRef.current, 1, 5, {
-            Scale = 1.1
+            Scale = 1.05
         })
     end
     
@@ -74,6 +76,8 @@ function Switch(props: SwitchProps)
         })
 
         SetToggled(not IsToggled)
+
+        props.OnToggle()
     end
 
     return React.createElement("ImageButton", {
