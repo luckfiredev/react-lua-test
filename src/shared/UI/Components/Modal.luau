@@ -2,6 +2,7 @@
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
+local Spr = require(ReplicatedStorage.Shared.Packages.spr)
 
 local Rubik = require(ReplicatedStorage.Shared.UI.Fonts.Rubik)
 
@@ -9,16 +10,65 @@ type ModalProps = {
     Text: string,
     Accent: Color3,
 
+    OnClose: () -> (),
+
     children: any?,
 }
 
 function Modal(props: ModalProps)
+    local ExitScaleRef = React.useRef(nil)
+    local ExitButtonDamp, ExitButtonFreq = 0.5, 3
+
     local h, s, v = Color3.toHSV(props.Accent)
     local AccentSecondary = Color3.fromHSV(
         h,
         math.max(s * 0.45, 0),
         math.min(v + (1 - v) * 0.75, 1)
     )
+
+    local HandleExitClick = function()
+        if props.OnClose then
+            props.OnClose()
+        end
+
+        if not ExitScaleRef.current then
+            return
+        end
+
+        Spr.target(ExitScaleRef.current, ExitButtonDamp, ExitButtonFreq, {
+            Scale = 1.1
+        })
+    end
+
+    local HandleExitHoldClick = function()
+        if not ExitScaleRef.current then
+            return
+        end
+
+        Spr.target(ExitScaleRef.current, ExitButtonDamp, ExitButtonFreq, {
+            Scale = 0.9
+        })
+    end
+
+    local HandleExitHover = function()
+        if not ExitScaleRef.current then
+            return
+        end
+
+        Spr.target(ExitScaleRef.current, ExitButtonDamp, ExitButtonFreq, {
+            Scale = 1.1
+        })
+    end
+
+    local HandleExitUnhover = function()
+        if not ExitScaleRef.current then
+            return
+        end
+
+        Spr.target(ExitScaleRef.current, ExitButtonDamp, ExitButtonFreq, {
+            Scale = 1
+        })
+    end
 
     return React.createElement("Frame", {
         AutomaticSize = Enum.AutomaticSize.XY,
@@ -44,6 +94,46 @@ function Modal(props: ModalProps)
 
             Radius = React.createElement("UICorner", {
                 CornerRadius = UDim.new(0, 40),
+            }),
+        }),
+
+        ExitButton = React.createElement("Frame", {
+            Position = UDim2.new(1, -50, 0, -50), 
+            Size = UDim2.new(0, 100, 0, 100),
+            BackgroundTransparency = 1,
+        }, {
+            Button = React.createElement("ImageButton", {
+                ZIndex = 100,
+                Image = "rbxassetid://121566994625192",
+                Size = UDim2.new(0, 100, 0, 100),
+                BackgroundColor3 = Color3.new(1,1,1),
+                BackgroundTransparency = 1,
+
+                [React.Event.Activated] = HandleExitClick,
+                [React.Event.MouseButton1Down] = HandleExitHoldClick,
+                [React.Event.MouseEnter] = HandleExitHover,
+                [React.Event.MouseLeave] = HandleExitUnhover,
+            }, {
+                Gradient = React.createElement("UIGradient", {
+                    Color = ColorSequence.new{
+                        ColorSequenceKeypoint.new(0, Color3.fromHex("#FF5592")),
+                        ColorSequenceKeypoint.new(1, Color3.fromHex("#FF3A3A")),
+                    },
+                    Rotation = 90,
+                }),
+
+                Scale = React.createElement("UIScale", {
+                    Scale = 1,
+                    
+                    ref = ExitScaleRef,
+                }),
+            }),
+
+            Layout = React.createElement("UIListLayout", {
+                FillDirection = Enum.FillDirection.Horizontal,
+                HorizontalAlignment = Enum.HorizontalAlignment.Center,
+                VerticalAlignment = Enum.VerticalAlignment.Center,
+                Padding = UDim.new(0, 10),
             }),
         }),
 

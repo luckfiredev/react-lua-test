@@ -23,7 +23,7 @@ function Switch(props: SwitchProps)
             return
         end
 
-        Spr.target(ScaleRef.current, 1, 5, {
+        Spr.target(ScaleRef.current, 0.5, 2.5, {
             Scale = 1.05
         })
     end
@@ -33,7 +33,7 @@ function Switch(props: SwitchProps)
             return
         end
 
-        Spr.target(ScaleRef.current, 1, 5, {
+        Spr.target(ScaleRef.current, 0.5, 3, {
             Scale = 1
         })
     end
@@ -43,7 +43,7 @@ function Switch(props: SwitchProps)
             return
         end
 
-        Spr.target(ToggleRef.current, 0.5, 5, {
+        Spr.target(ToggleRef.current, 0.5, 3, {
             Position = IsToggled
                 and UDim2.new(1, -50, 0, 0)
                 or nil,
@@ -56,7 +56,7 @@ function Switch(props: SwitchProps)
             return
         end
 
-        Spr.target(ToggleRef.current, 1, 5, {
+        Spr.target(ToggleRef.current, 0.25, 5, {
             Size = UDim2.new(0, 40, 0, 40),
             Position = IsToggled
                 and UDim2.new(1, -40, 0, 0)
