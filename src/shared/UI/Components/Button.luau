@@ -92,6 +92,7 @@ function Button(props: ButtonProps)
         Button = React.createElement("TextButton", {
             ZIndex = 4,
             AutomaticSize = Enum.AutomaticSize.XY,
+            AutoButtonColor = false,
 
             Text = "",
 
