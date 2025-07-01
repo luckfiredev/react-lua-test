@@ -77,7 +77,9 @@ function Switch(props: SwitchProps)
 
         SetToggled(not IsToggled)
 
-        props.OnToggle()
+        if props.OnToggle then
+            props.OnToggle()
+        end
     end
 
     return React.createElement("ImageButton", {
