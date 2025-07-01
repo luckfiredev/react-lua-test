@@ -33,6 +33,21 @@ local shopItems: { ShopCardItem.ShopCardItemProps } = {
         GradientBottom = Color3.fromHex("#FE8C00"),
 
         Purchased = false,
+        Giftable = false,
+        OnPurchase = function(setPurchased)
+        end,
+        OnGift = function()
+        end,
+    },
+    {
+        ProductName = "Test",
+        ProductDescription = "Test Product",
+        ProductPrice = 9999,
+
+        GradientTop = Color3.fromHex("#4161ff"),
+        GradientBottom = Color3.fromHex("#c300fe"),
+
+        Purchased = true,
         Giftable = true,
         OnPurchase = function(setPurchased)
         end,
@@ -77,7 +92,7 @@ function Category(props: CatgegoryProps)
                 FontFace = Rubik.ExtraBold,
                 Text = "Boosts",
                 TextColor3 = Color3.fromRGB(255, 255, 255),
-                TextSize = 44,
+                TextSize = 48,
 
                 BackgroundTransparency = 1,
             }, {
@@ -199,13 +214,6 @@ function Shop()
                             Title = "Boosts",
                             Icon = "rbxassetid://79399947545310",
                             Items = shopItems,
-                        }),
-
-                        Boosts2 = React.createElement(Category, {
-                            Title = "Boosts",
-                            Icon = "rbxassetid://79399947545310",
-                            Items = shopItems,
-
                             LastChild = true,
                         }),
 

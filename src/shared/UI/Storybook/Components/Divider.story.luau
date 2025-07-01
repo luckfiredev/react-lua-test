@@ -22,22 +22,25 @@ local story = {
             Size = UDim2.new(1, 0, 1, 0),
             BackgroundTransparency = 1,
         }, {
-            VerticalDivider = React.createElement("Frame", {
+            VerticalDivider = React.createElement(Divider, {
+                Vertical = true,
+                Accent = props.controls.Accent,
+            }),
+
+            HorizontalDivider = React.createElement("Frame", {
                 Size = UDim2.new(1, 0, 0, 24),
                 BackgroundTransparency = 1,
             }, {
                 Divider = React.createElement(Divider, {
-                    Rotation = "Vertical",
                     Accent = props.controls.Accent,
                 }),
             }),
 
-            VerticalDividerCustomWidth = React.createElement("Frame", {
+            HorizontalDividerWithCustomWidth = React.createElement("Frame", {
                 Size = UDim2.new(0.5, 0, 0, 24),
                 BackgroundTransparency = 1,
             }, {
                 Divider = React.createElement(Divider, {
-                    Rotation = "Vertical",
                     Accent = props.controls.Accent,
                 }),
             }),

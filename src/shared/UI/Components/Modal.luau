@@ -123,13 +123,13 @@ function Modal(props: ModalProps)
         }),
 
         Heading = React.createElement("Frame", {
-            ZIndex = 2,
+            ZIndex = 100,
             AnchorPoint = Vector2.new(0.05, 0.05),
             Size = UDim2.new(1, 0, 1, 0),
             BackgroundTransparency = 1,
         }, {
             Text = React.createElement("TextLabel", {
-                ZIndex = 2,
+                ZIndex = 10,
                 AutomaticSize = Enum.AutomaticSize.XY,
                 FontFace = Rubik.Bold,
                 Text = props.Text,
@@ -154,6 +154,7 @@ function Modal(props: ModalProps)
             }),
 
             DropText = React.createElement("TextLabel", {
+                ZIndex = 9,
                 AutomaticSize = Enum.AutomaticSize.XY,
                 Position = UDim2.new(0, -5, 0, 10),
                 FontFace = Rubik.Bold,
@@ -172,6 +173,19 @@ function Modal(props: ModalProps)
 
             Scale = React.createElement("UIScale", {
                 Scale = 1.25,
+            }),
+        }),
+
+        DropShadow = React.createElement("ImageLabel", {
+            ZIndex = -1,
+            Size = UDim2.new(1, 92, 1, 100),
+            Position = UDim2.new(0, -46, 0, -46),
+            Image = "rbxassetid://100694920563222",
+            ImageColor3 = props.Accent,
+            BackgroundTransparency = 1,
+        }, {
+            Radius = React.createElement("UICorner", {
+                CornerRadius = UDim.new(0, 5),
             }),
         }),
 

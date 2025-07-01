@@ -20,23 +20,33 @@ local story = {
     reactRoblox = ReactRoblox,
     controls = controls,
     story = function(props)
-        return React.createElement(ShopCardItem, {
-            ProductName = props.controls.ProductName,
-            ProductDescription = props.controls.ProductDescription,
-            ProductPrice = props.controls.ProductPrice,
+        return React.createElement("Frame", {
+            Size = UDim2.new(1, 0, 1, 0),
+            BackgroundTransparency = 1,
+        }, {
+            React.createElement("Frame", {
+                AutomaticSize = Enum.AutomaticSize.XY,
+                AnchorPoint = Vector2.new(0.5, 0.5),
+                Position = UDim2.new(0.5, 0, 0.5, 0),
+                BackgroundTransparency = 1,
+            }, {
+                React.createElement(ShopCardItem, {
+                    ProductName = props.controls.ProductName,
+                    ProductDescription = props.controls.ProductDescription,
+                    ProductPrice = props.controls.ProductPrice,
 
-            GradientTop = props.controls.GradientTop,
-            GradientBottom = props.controls.GradientBottom,
+                    GradientTop = props.controls.GradientTop,
+                    GradientBottom = props.controls.GradientBottom,
 
-            Purchased = false,
-            Giftable = true,
+                    Purchased = false,
+                    Giftable = false,
 
-            OnPurchase = function(setPurchased)
-                -- setPurchased(true)
-            end,
-            OnGift = function()
-                print("Gift")
-            end,
+                    OnPurchase = function(setPurchased)
+                    end,
+                    OnGift = function()
+                    end,
+                })
+            })
         })
     end
 }
