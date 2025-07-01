@@ -118,6 +118,7 @@ function Button(props: ButtonProps)
                     BackgroundTransparency = 1,
                 }, {
                     Icon = props.Icon and React.createElement("ImageLabel", {
+                        ZIndex = 2,
                         Image = props.Icon,
                         ImageTransparency = ButtonTransparency,
                         Size = UDim2.new(0, 36, 0, 36),
@@ -125,6 +126,7 @@ function Button(props: ButtonProps)
                     }, {}),
 
                     Text = props.Text and React.createElement("TextLabel", {
+                        ZIndex = 2,
                         AutomaticSize = Enum.AutomaticSize.XY,
 
                         Text = props.Text,

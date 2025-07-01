@@ -7,7 +7,8 @@ local ReactRoblox = require(ReplicatedStorage.Shared.Packages["react-roblox"])
 local Background = require(ReplicatedStorage.Shared.UI.Components.Background)
 
 local controls = {
-    Accent = Color3.fromHex("#FEC752"),
+    GradientLeft = Color3.fromHex("#1A85FF"),
+    GradientRight = Color3.fromHex("#0FB7FF"),
 }
 
 local story = {
@@ -15,10 +16,7 @@ local story = {
     reactRoblox = ReactRoblox,
     controls = controls,
     story = function(props)
-        return React.createElement(Background, {
-            GradientLeft = Color3.fromHex("#1A85FF"),
-            GradientRight = Color3.fromHex("#0FB7FF"),
-        })
+        return React.createElement(Background, props.controls)
     end
 }
 

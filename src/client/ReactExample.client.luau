@@ -8,5 +8,7 @@ local ReactRoblox = require(ReplicatedStorage.Shared.Packages["react-roblox"])
 local Shop = require(ReplicatedStorage.Shared.UI.Interfaces.Shop)
 
 local handle = Instance.new("ScreenGui",Players.LocalPlayer.PlayerGui)
+handle.IgnoreGuiInset = true
+
 local root = ReactRoblox.createRoot(handle)
 root:render(React.createElement(Shop, {}, {}))

@@ -20,10 +20,8 @@ local shopItems: { ShopCardItem.ShopCardItemProps } = {
         Purchased = false,
         Giftable = true,
         OnPurchase = function(setPurchased)
-            -- setPurchased(true)
         end,
         OnGift = function()
-            print("Gift")
         end,
     },
     {
@@ -37,47 +35,67 @@ local shopItems: { ShopCardItem.ShopCardItemProps } = {
         Purchased = false,
         Giftable = true,
         OnPurchase = function(setPurchased)
-            -- setPurchased(true)
         end,
         OnGift = function()
-            print("Gift")
         end,
     }
 }
 
-function Shop()
+type CatgegoryProps = {
+    Title: string,
+    Icon: string,
+
+    Items: { ShopCardItem.ShopCardItemProps },
+
+    LastChild: boolean,
+}
+
+function Category(props: CatgegoryProps)
     local Items = {}
-    for _, item in ipairs(shopItems) do
+    for _, item in ipairs(props.Items) do
         table.insert(Items, React.createElement(ShopCardItem, item))
     end
 
-    local Test =  React.createElement("Frame", {
+    return React.createElement("Frame", {
         AutomaticSize = Enum.AutomaticSize.XY,
         BackgroundTransparency = 1,
     }, {
         Heading = React.createElement("Frame", {
-            Size = UDim2.new(1, 0, 0, 38),
+            Size = UDim2.new(1, 0, 0, 50),
             BackgroundTransparency = 1,
         }, {
+            Icon = React.createElement("ImageLabel", {
+                Image = props.Icon,
+                Size = UDim2.new(0, 50, 0, 50),
+                BackgroundTransparency = 1,
+            }),
+
             Text = React.createElement("TextLabel", {
                 AutomaticSize = Enum.AutomaticSize.XY,
                 TextXAlignment = Enum.TextXAlignment.Left,
                 TextYAlignment = Enum.TextYAlignment.Top,
-                FontFace = Rubik.Bold,
+                FontFace = Rubik.ExtraBold,
                 Text = "Boosts",
                 TextColor3 = Color3.fromRGB(255, 255, 255),
-                TextSize = 38,
-
-                TextTruncate = Enum.TextTruncate.AtEnd,
-                TextWrapped = false,
-                ClipsDescendants = true,
+                TextSize = 44,
 
                 BackgroundTransparency = 1,
             }, {
                 Stroke = React.createElement("UIStroke", {
-                    Thickness = 2,
+                    Thickness = 4,
                     Color = Color3.fromRGB(0,0,0),
                 }),
+            }),
+
+            Layout = React.createElement("UIListLayout", {
+                FillDirection = Enum.FillDirection.Horizontal,
+                HorizontalAlignment = Enum.HorizontalAlignment.Left,
+                VerticalAlignment = Enum.VerticalAlignment.Center,
+                Padding = UDim.new(0, 5),
+            }),
+
+            Padding = React.createElement("UIPadding", {
+                PaddingLeft = UDim.new(0, 2),
             }),
         }),
 
@@ -86,20 +104,43 @@ function Shop()
             BackgroundTransparency = 1,
         }, {
             React.createElement(React.Fragment, {}, Items),
-            -- React.createElement(React.Fragment, {}, Items, Items, Items),
+
+            ContentDivider = not props.LastChild and React.createElement("Frame", {
+                AutomaticSize = Enum.AutomaticSize.X,
+                Size = UDim2.new(0, 32, 1, -10),
+                BackgroundTransparency = 1,
+            }, {
+                Divider = React.createElement(Divider, {
+                    Vertical = true,
+                    Accent = Color3.fromHex("#FEC752"),
+                }),
+
+                Padding = React.createElement("UIPadding", {
+                    PaddingRight = UDim.new(0, 10),
+                    PaddingLeft = UDim.new(0, 10),
+                }),
+            }),
 
             Layout = React.createElement("UIListLayout", {
                 FillDirection = Enum.FillDirection.Horizontal,
                 HorizontalAlignment = Enum.HorizontalAlignment.Left,
-                Padding = UDim.new(0, 10),
+                Padding = UDim.new(0, 15),
             }),
 
             Padding = React.createElement("UIPadding", {
+                PaddingTop = UDim.new(0, 20),
                 PaddingRight = UDim.new(0, 3),
                 PaddingLeft = UDim.new(0, 3),
             }),
         }),
     })
+end
+
+function Shop()
+    local Items = {}
+    for _, item in ipairs(shopItems) do
+        table.insert(Items, React.createElement(ShopCardItem, item))
+    end
 
     return React.createElement(React.Fragment, {}, {
         Shop = React.createElement("Frame", {
@@ -109,7 +150,8 @@ function Shop()
             BackgroundTransparency = 1,
         }, {
             Modal = React.createElement(Modal, {
-                accent = Color3.fromHex("#FEC752"),
+                Text = "SHOP",
+                Accent = Color3.fromHex("#FEC752"),
             }, {
                 Content = React.createElement("Frame", {
                     Size = UDim2.new(1, 0, 1, 0),
@@ -117,7 +159,7 @@ function Shop()
                 }, {
                     HeadingDivider = React.createElement("Frame", {
                         AutomaticSize = Enum.AutomaticSize.XY,
-                        Size = UDim2.new(0, 993, 0, 24),
+                        Size = UDim2.new(1, 0, 0, 32),
                         BackgroundTransparency = 1,
                     }, {
                         Divider = React.createElement(Divider, {
@@ -130,7 +172,7 @@ function Shop()
                         }),
 
                         Padding = React.createElement("UIPadding", {
-                            PaddingRight = UDim.new(0, 35),
+                            PaddingLeft = UDim.new(0, 182),
                             PaddingBottom = UDim.new(0, 35),
                         }),
                     }),
@@ -153,20 +195,22 @@ function Shop()
 
                         ClipsDescendants = true,
                     }, {
-                        Boosts = Test,
+                        Boosts = React.createElement(Category, {
+                            Title = "Boosts",
+                            Icon = "rbxassetid://79399947545310",
+                            Items = shopItems,
+                        }),
 
-                        -- ContentDivider = React.createElement("Frame", {
-                        --     Size = UDim2.new(1, 0, 0, 24),
-                        -- }, {
-                        --     Divider = React.createElement(Divider, {
-                        --         Rotation = "Horizontal",
-                        --         Accent = Color3.fromHex("#FEC752"),
-                        --     }),
-                        -- }),
+                        Boosts2 = React.createElement(Category, {
+                            Title = "Boosts",
+                            Icon = "rbxassetid://79399947545310",
+                            Items = shopItems,
 
-                        Boosts2 = Test,
+                            LastChild = true,
+                        }),
 
                         Layout = React.createElement("UIListLayout", {
+                            SortOrder = Enum.SortOrder.LayoutOrder,
                             FillDirection = Enum.FillDirection.Horizontal,
                             HorizontalAlignment = Enum.HorizontalAlignment.Left,
                             Padding = UDim.new(0, 10),
@@ -182,7 +226,7 @@ function Shop()
                     Padding = React.createElement("UIPadding", {
                         PaddingTop = UDim.new(0, 35),
                         PaddingRight = UDim.new(0, 35),
-                        PaddingBottom = UDim.new(0, 35+24+25),
+                        PaddingBottom = UDim.new(0, 35+24+8),
                         PaddingLeft = UDim.new(0, 35),
                     }),
                 }),
@@ -197,10 +241,10 @@ function Shop()
             }),
         }),
         
-        -- Background = React.createElement(Background, {
-        --     GradientLeft = Color3.fromHex("#BA24FF"),
-        --     GradientRight = Color3.fromHex("#FFA82F"),
-        -- }),
+        Background = React.createElement(Background, {
+            GradientLeft = Color3.fromHex("#BA24FF"),
+            GradientRight = Color3.fromHex("#FFA82F"),
+        }),
     })
 end
 

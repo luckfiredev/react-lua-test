@@ -4,20 +4,18 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 
 type DividerProps = {
-    Rotation: "Horizontal" | "Vertical",
+    Vertical: boolean?,
     Accent: Color3,
 }
 
 function Divider(props)
     return React.createElement("ImageLabel", {
-        Size = UDim2.new(1, 0, 0, 24),
-        Image = "rbxassetid://130173825949601",
+        Size = not props.Vertical and UDim2.new(1, 0, 0, 24) or UDim2.new(0, 24, 1, 0),
+        Image = "rbxassetid://" .. tostring(not props.Vertical and "129751566506714" or "75505023015533"),
         ImageColor3 = props.Accent,
         ScaleType = Enum.ScaleType.Tile,
-        TileSize = UDim2.new(0, 72, 0, 24),
+        TileSize = UDim2.new(0, 32, 0, 32),
         BackgroundTransparency = 1,
-
-        Rotation = props.Position == "Horizontal" and 90 or 0,
     })
 end
 

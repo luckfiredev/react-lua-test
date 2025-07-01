@@ -27,7 +27,7 @@ function Background(props: BackgroundProps)
             Rotation = -25,
         }),
 
-        Gradiet = React.createElement("UIGradient", {
+        Gradient = React.createElement("UIGradient", {
             Color = ColorSequence.new{
                 ColorSequenceKeypoint.new(0, props.GradientLeft),
                 ColorSequenceKeypoint.new(1, props.GradientRight),
