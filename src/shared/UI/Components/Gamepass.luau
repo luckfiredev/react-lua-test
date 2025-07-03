@@ -1,17 +1,17 @@
 --!strict
 
+local MarketplaceService = game:GetService("MarketplaceService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 
 local useState = React.useState
+local useEffect = React.useEffect
 
 local Button = require(ReplicatedStorage.Shared.UI.Components.Button)
 local Rubik = require(ReplicatedStorage.Shared.UI.Fonts.Rubik)
 
-export type ShopCardItemProps = {
-    ProductName: string,
-    ProductDescription: string,
-    ProductPrice: number,
+export type GamepassProps = {
+    ProductId: number,
 
     GradientTop: Color3,
     GradientBottom: Color3,
@@ -20,8 +20,22 @@ export type ShopCardItemProps = {
     Giftable: boolean,
     OnPurchase: ((p: boolean) -> ()) -> (),
     OnGift: () -> (),
+}
 
-    children: any,
+type Product = {
+    Name: string,
+    Description: string,
+    PriceInRobux: number,
+    ProductId: number,
+    ProductType: string,
+    Created: string,
+    Updated: string,
+    ContentRatingTypeId: number,
+    MinimumMembershipLevel: number,
+    IsPublicDomain: boolean,
+    TargetId: number,
+
+    IconImageAssetId: string,
 }
 
 local function FormatNumber(num: number)
@@ -29,7 +43,19 @@ local function FormatNumber(num: number)
         :gsub(",(%-?)$","%1"):reverse()
 end
 
-local function ShopCardItem(props: ShopCardItemProps)
+local function Gamepass(props: GamepassProps)
+    local ProductInfo, SetProductInfo = useState(nil :: Product?)
+
+    useEffect(function()
+        local success, err = pcall(function()
+            SetProductInfo(MarketplaceService:GetProductInfo(props.ProductId, Enum.InfoType.GamePass) :: Product)
+        end)
+
+        if not success then
+            warn(err)
+        end
+    end, {})
+
     local Size = Vector2.new(320, 400)
     local Rounding = 20
 
@@ -43,7 +69,7 @@ local function ShopCardItem(props: ShopCardItemProps)
         props.OnPurchase(SetPurchased)
     end
     
-    return React.createElement("Frame", {
+    return ProductInfo and React.createElement("Frame", {
         Size = UDim2.new(0, Size.X, 0, Size.Y+72),
         BackgroundTransparency = 1,
     }, { 
@@ -59,19 +85,18 @@ local function ShopCardItem(props: ShopCardItemProps)
                 BackgroundTransparency = 1,
             }, {
                 Name = React.createElement("TextLabel", {
-                    Size = UDim2.new(1, 0, 0, 36),
+                    AutomaticSize = Enum.AutomaticSize.Y,
+                    Size = UDim2.new(1, 0, 0, 0),
 
                     TextXAlignment = Enum.TextXAlignment.Left,
                     TextYAlignment = Enum.TextYAlignment.Top,
                     
                     FontFace = Rubik.Bold,
-                    Text = props.ProductName,
+                    Text = ProductInfo.Name,
                     TextColor3 = Color3.fromRGB(255, 255, 255),
                     TextSize = 34,
 
-                    TextTruncate = Enum.TextTruncate.AtEnd,
-                    TextWrapped = false,
-                    ClipsDescendants = true,
+                    TextWrapped = true,
 
                     BackgroundTransparency = 1,
                 }, {
@@ -88,7 +113,7 @@ local function ShopCardItem(props: ShopCardItemProps)
                     TextYAlignment = Enum.TextYAlignment.Top,
 
                     FontFace = Rubik.Medium,
-                    Text = props.ProductDescription,
+                    Text = ProductInfo.Description,
                     TextColor3 = Color3.fromRGB(255, 255, 255),
                     TextSize = 30,
 
@@ -119,6 +144,14 @@ local function ShopCardItem(props: ShopCardItemProps)
                     PaddingRight = UDim.new(0, 15),
                     PaddingLeft = UDim.new(0, 15),
                 }),
+            }),
+
+            Icon = React.createElement("ImageLabel", {
+                Position = UDim2.new(0, 0, 0, 50),
+                Size = UDim2.new(0, Size.X, 0, Size.X),
+                Image = "rbxassetid://" .. ProductInfo.IconImageAssetId,
+                ImageTransparency = 0.5,
+                BackgroundTransparency = 1,
             }),
 
             Pattern = React.createElement("ImageLabel", {
@@ -164,7 +197,7 @@ local function ShopCardItem(props: ShopCardItemProps)
                 Button = React.createElement(Button, {
                     Size = not Purchased and props.Giftable and UDim2.new(1, -3, 1, 0) or UDim2.new(1, 0, 1, 0),
                     Icon = "rbxassetid://124876235625151",
-                    Text = FormatNumber(props.ProductPrice),
+                    Text = FormatNumber(ProductInfo.PriceInRobux),
                     GradientLeft = Color3.fromHex("#1AFFAF"),
                     GradientRight = Color3.fromHex("#3FFF0F"),
                     OnClick = HandlePurchase,
@@ -244,4 +277,4 @@ local function ShopCardItem(props: ShopCardItemProps)
     })
 end
 
-return ShopCardItem
+return Gamepass

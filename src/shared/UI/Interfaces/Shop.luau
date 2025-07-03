@@ -6,61 +6,114 @@ local UIScale = require(ReplicatedStorage.Shared.UI.Components.UIScale)
 local Background = require(ReplicatedStorage.Shared.UI.Components.Background)
 local Modal = require(ReplicatedStorage.Shared.UI.Components.Modal)
 local Divider = require(ReplicatedStorage.Shared.UI.Components.Divider)
-local ShopCardItem = require(ReplicatedStorage.Shared.UI.Components.ShopCardItem)
+local Gamepass = require(ReplicatedStorage.Shared.UI.Components.Gamepass)
 
-local shopItems: { ShopCardItem.ShopCardItemProps } = { 
+local shopItems: { Gamepass.GamepassProps } = { 
     {
-        ProductName = "x2 Cash",
-        ProductDescription = "Obtain double the currency to upgrade your tycoon faster!\n* Does not apply to cash purchases.",
-        ProductPrice = 9999,
+        ProductId = 965978158,
 
-        GradientTop = Color3.fromHex("#00FE00"),
-        GradientBottom = Color3.fromHex("#0FB7FF"),
+        GradientTop = Color3.fromHex("#fe8c00"),
+        GradientBottom = Color3.fromHex("#fe0000"),
 
         Purchased = false,
         Giftable = true,
+
         OnPurchase = function(setPurchased)
         end,
         OnGift = function()
         end,
     },
     {
-        ProductName = "Auto Rebirth",
-        ProductDescription = "Automatically rebirth when you hit the requirements.\n* Toggleable in Rebirth Menu & Settings.",
-        ProductPrice = 9999,
+        ProductId = 880675418,
 
-        GradientTop = Color3.fromHex("#FF41AC"),
-        GradientBottom = Color3.fromHex("#FE8C00"),
+        GradientTop = Color3.fromHex("#fe00fe"),
+        GradientBottom = Color3.fromHex("#5000fe"),
 
         Purchased = false,
-        Giftable = false,
+        Giftable = true,
+
         OnPurchase = function(setPurchased)
         end,
         OnGift = function()
         end,
     },
     {
-        ProductName = "Test",
-        ProductDescription = "Test Product",
-        ProductPrice = 9999,
+        ProductId = 270896353,
 
-        GradientTop = Color3.fromHex("#4161ff"),
-        GradientBottom = Color3.fromHex("#c300fe"),
+        GradientTop = Color3.fromHex("#fe0000"),
+        GradientBottom = Color3.fromHex("#fecb00"),
 
-        Purchased = true,
+        Purchased = false,
         Giftable = true,
+
         OnPurchase = function(setPurchased)
         end,
         OnGift = function()
         end,
-    }
+    },
+    {
+        ProductId = 854422625,
+
+        GradientTop = Color3.fromHex("#00fe6a"),
+        GradientBottom = Color3.fromHex("#32ce13"),
+
+        Purchased = false,
+        Giftable = true,
+
+        OnPurchase = function(setPurchased)
+        end,
+        OnGift = function()
+        end,
+    },
+    {
+        ProductId = 962559337,
+
+        GradientTop = Color3.fromHex("#00a5fe"),
+        GradientBottom = Color3.fromHex("#2913ce"),
+
+        Purchased = false,
+        Giftable = true,
+
+        OnPurchase = function(setPurchased)
+        end,
+        OnGift = function()
+        end,
+    },
+    {
+        ProductId = 139868048,
+
+        GradientTop = Color3.fromHex("#cb00fe"),
+        GradientBottom = Color3.fromHex("#ff0073"),
+
+        Purchased = false,
+        Giftable = true,
+
+        OnPurchase = function(setPurchased)
+        end,
+        OnGift = function()
+        end,
+    },
+    {
+        ProductId = 107966795,
+
+        GradientTop = Color3.fromHex("#fef600"),
+        GradientBottom = Color3.fromHex("#ffad0a"),
+
+        Purchased = false,
+        Giftable = true,
+
+        OnPurchase = function(setPurchased)
+        end,
+        OnGift = function()
+        end,
+    },
 }
 
 type CatgegoryProps = {
     Title: string,
     Icon: string,
 
-    Items: { ShopCardItem.ShopCardItemProps },
+    Items: { Gamepass.GamepassProps },
 
     LastChild: boolean,
 }
@@ -68,7 +121,7 @@ type CatgegoryProps = {
 function Category(props: CatgegoryProps)
     local Items = {}
     for _, item in ipairs(props.Items) do
-        table.insert(Items, React.createElement(ShopCardItem, item))
+        table.insert(Items, React.createElement(Gamepass, item))
     end
 
     return React.createElement("Frame", {
@@ -154,7 +207,7 @@ end
 function Shop()
     local Items = {}
     for _, item in ipairs(shopItems) do
-        table.insert(Items, React.createElement(ShopCardItem, item))
+        table.insert(Items, React.createElement(Gamepass, item))
     end
 
     return React.createElement(React.Fragment, {}, {

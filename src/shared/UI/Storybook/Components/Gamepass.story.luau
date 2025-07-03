@@ -4,7 +4,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 local ReactRoblox = require(ReplicatedStorage.Shared.Packages["react-roblox"])
 
-local ShopCardItem = require(ReplicatedStorage.Shared.UI.Components.ShopCardItem)
+local Gamepass = require(ReplicatedStorage.Shared.UI.Components.Gamepass)
 
 local controls = {
     ProductName = "Product Name",
@@ -30,10 +30,12 @@ local story = {
                 Position = UDim2.new(0.5, 0, 0.5, 0),
                 BackgroundTransparency = 1,
             }, {
-                React.createElement(ShopCardItem, {
-                    ProductName = props.controls.ProductName,
-                    ProductDescription = props.controls.ProductDescription,
-                    ProductPrice = props.controls.ProductPrice,
+                React.createElement(Gamepass, {
+                    ProductId = 965978158,
+
+                    -- ProductName = props.controls.ProductName,
+                    -- ProductDescription = props.controls.ProductDescription,
+                    -- ProductPrice = props.controls.ProductPrice,
 
                     GradientTop = props.controls.GradientTop,
                     GradientBottom = props.controls.GradientBottom,
