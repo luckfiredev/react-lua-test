@@ -4,20 +4,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 local ReactRoblox = require(ReplicatedStorage.Shared.Packages["react-roblox"])
 
-local Button = require(ReplicatedStorage.Shared.UI.Components.Button)
-
-function PurpleCounterButton()
-    local count, setCount = React.useState(0)
-
-    return React.createElement(Button, {
-        Text = tostring(count),
-        GradientLeft = Color3.fromHex("#941AFF"),
-        GradientRight = Color3.fromHex("#FF0FB7"),
-        OnClick = function()
-            setCount(count + 1)
-        end
-    })
-end
+local Switch = require(ReplicatedStorage.UI.Components.Switch)
 
 local story = {
     react = React,
@@ -29,18 +16,9 @@ local story = {
 
             BackgroundTransparency = 1,
         }, {
-            B = React.createElement(Button, {
-                Text = "BUTTON",
-                GradientLeft = Color3.fromHex("#1A85FF"),
-                GradientRight = Color3.fromHex("#0FB7FF"),
+            Switch = React.createElement(Switch, {
+                Toggled = false,
             }),
-            C = React.createElement(PurpleCounterButton),
-            D = React.createElement(Button, {
-                Disabled = true,
-                Text = "DISABLED",
-                GradientLeft = Color3.fromHex("#CFCFCF"),
-                GradientRight = Color3.fromHex("#717171"),
-            })
         }, {
             LayoutOrder = React.createElement("UIListLayout", {
                 FillDirection = Enum.FillDirection.Horizontal,

@@ -5,23 +5,32 @@
 
     "ReplicatedStorage": {
       "Shared": {
-        "$path": "src/shared",
+        "$path": "src/ReplicatedStorage/Shared",
         "Packages": {
           "$path": "Packages"
         }
+      },
+      "UI": {
+        "$path": "src/ReplicatedStorage/UI"
+      },
+      "Storybook": {
+        "$path": "src/ReplicatedStorage/Storybook"
+      },
+      "Utility": {
+        "$path": "src/ReplicatedStorage/Utility"
       }
     },
 
     "ServerScriptService": {
       "Server": {
-        "$path": "src/server"
+        "$path": "src/Server"
       }
     },
 
     "StarterPlayer": {
       "StarterPlayerScripts": {
         "Client": {
-          "$path": "src/client"
+          "$path": "src/Client"
         }
       }
     },

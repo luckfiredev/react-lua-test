@@ -5,8 +5,8 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 local ReactRoblox = require(ReplicatedStorage.Shared.Packages["react-roblox"])
 
-local Shop = require(ReplicatedStorage.Shared.UI.Interfaces.Shop)
-local Switch = require(ReplicatedStorage.Shared.UI.Components.Switch)
+local Shop = require(ReplicatedStorage.UI.Interfaces.Shop)
+local Switch = require(ReplicatedStorage.UI.Components.Switch)
 
 local handle = Instance.new("ScreenGui",Players.LocalPlayer.PlayerGui)
 handle.IgnoreGuiInset = true
@@ -32,4 +32,4 @@ local CreateSwitch = function()
 end
 
 local root = ReactRoblox.createRoot(handle)
-root:render(React.createElement(Shop, {}, {}))
+root:render(React.createElement(CreateSwitch, {}, {}))

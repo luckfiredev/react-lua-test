@@ -1,12 +1,12 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 
-local Rubik = require(ReplicatedStorage.Shared.UI.Fonts.Rubik)
-local UIScale = require(ReplicatedStorage.Shared.UI.Components.UIScale)
-local Background = require(ReplicatedStorage.Shared.UI.Components.Background)
-local Modal = require(ReplicatedStorage.Shared.UI.Components.Modal)
-local Divider = require(ReplicatedStorage.Shared.UI.Components.Divider)
-local Gamepass = require(ReplicatedStorage.Shared.UI.Components.Gamepass)
+local Rubik = require(ReplicatedStorage.UI.Fonts.Rubik)
+local UIScale = require(ReplicatedStorage.UI.Components.UIScale)
+local Background = require(ReplicatedStorage.UI.Components.Background)
+local Modal = require(ReplicatedStorage.UI.Components.Modal)
+local Divider = require(ReplicatedStorage.UI.Components.Divider)
+local Gamepass = require(ReplicatedStorage.UI.Components.Gamepass)
 
 local shopItems: { Gamepass.GamepassProps } = { 
     {

@@ -1,11 +1,11 @@
 --!strict
 
-local SoundService = game:GetService("SoundService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 local Spr = require(ReplicatedStorage.Shared.Packages.spr)
 
-local Rubik = require(ReplicatedStorage.Shared.UI.Fonts.Rubik)
+local Rubik = require(ReplicatedStorage.UI.Fonts.Rubik)
+local Sound = require(ReplicatedStorage.Utility.Sound)
 
 type ButtonProps = {
     Disabled: boolean?,
@@ -60,15 +60,10 @@ function Button(props: ButtonProps)
             Scale = 1.05
         })
 
-        local SwitchSound = Instance.new("Sound")
-        SwitchSound.Parent = SoundService
-        SwitchSound.SoundId = "rbxassetid://17161216230"
-        SwitchSound.Volume = 0.5
-
-        SwitchSound:Play()
-        task.delay(SwitchSound.TimeLength + 3, function()
-            SwitchSound:Destroy()
-        end)
+        Sound:PlaySound({
+            Id = "17161216230",
+            Volume = 0.5,
+        })
     end
 
     local function HandleHover()
@@ -82,15 +77,10 @@ function Button(props: ButtonProps)
             Scale = 1.05
         })
 
-        local SwitchSound = Instance.new("Sound")
-        SwitchSound.Parent = SoundService
-        SwitchSound.SoundId = "rbxassetid://17161204665"
-        SwitchSound.Volume = 0.5
-
-        SwitchSound:Play()
-        task.delay(SwitchSound.TimeLength + 3, function()
-            SwitchSound:Destroy()
-        end)
+        Sound:PlaySound({
+            Id = "17161204665",
+            Volume = 0.5,
+        })
     end
 
     local function HandleUnhover()

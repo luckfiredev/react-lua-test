@@ -1,10 +1,11 @@
 --!strict
 
-local SoundService = game:GetService("SoundService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 
 local Spr = require(ReplicatedStorage.Shared.Packages.spr)
+
+local Sound = require(ReplicatedStorage.Utility.Sound)
 
 local useRef = React.useRef
 local useState = React.useState
@@ -86,15 +87,10 @@ function Switch(props: SwitchProps)
                 or UDim2.new(1, -40, 0, 0),
         })
         
-        local SwitchSound = Instance.new("Sound")
-        SwitchSound.Parent = SoundService
-        SwitchSound.SoundId = "rbxassetid://121348992695732"
-        SwitchSound.Volume = 0.5
-
-        SwitchSound:Play()
-        task.delay(SwitchSound.TimeLength + 3, function()
-            SwitchSound:Destroy()
-        end)
+        Sound:PlaySound({
+            Id = "121348992695732",
+            Volume = 0.5,
+        })
     end
 
     return React.createElement("ImageButton", {

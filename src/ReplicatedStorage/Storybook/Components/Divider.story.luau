@@ -4,7 +4,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 local ReactRoblox = require(ReplicatedStorage.Shared.Packages["react-roblox"])
 
-local Divider = require(ReplicatedStorage.Shared.UI.Components.Divider)
+local Divider = require(ReplicatedStorage.UI.Components.Divider)
 
 local controls = {
     Accent = Color3.fromHex("#FEC752"),

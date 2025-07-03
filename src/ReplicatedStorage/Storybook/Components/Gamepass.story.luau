@@ -4,7 +4,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 local ReactRoblox = require(ReplicatedStorage.Shared.Packages["react-roblox"])
 
-local Gamepass = require(ReplicatedStorage.Shared.UI.Components.Gamepass)
+local Gamepass = require(ReplicatedStorage.UI.Components.Gamepass)
 
 local controls = {
     ProductId = 965978158,

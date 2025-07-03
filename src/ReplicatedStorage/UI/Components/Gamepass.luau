@@ -7,8 +7,8 @@ local React = require(ReplicatedStorage.Shared.Packages.react)
 local useState = React.useState
 local useEffect = React.useEffect
 
-local Button = require(ReplicatedStorage.Shared.UI.Components.Button)
-local Rubik = require(ReplicatedStorage.Shared.UI.Fonts.Rubik)
+local Button = require(ReplicatedStorage.UI.Components.Button)
+local Rubik = require(ReplicatedStorage.UI.Fonts.Rubik)
 
 export type GamepassProps = {
     ProductId: number,

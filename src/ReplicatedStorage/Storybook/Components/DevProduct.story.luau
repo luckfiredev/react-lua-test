@@ -4,7 +4,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 local ReactRoblox = require(ReplicatedStorage.Shared.Packages["react-roblox"])
 
-local DevProduct = require(ReplicatedStorage.Shared.UI.Components.DevProduct)
+local DevProduct = require(ReplicatedStorage.UI.Components.DevProduct)
 
 local controls = {
 }
