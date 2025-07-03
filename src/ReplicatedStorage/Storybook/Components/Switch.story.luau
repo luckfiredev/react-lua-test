@@ -6,6 +6,17 @@ local ReactRoblox = require(ReplicatedStorage.Shared.Packages["react-roblox"])
 
 local Switch = require(ReplicatedStorage.UI.Components.Switch)
 
+local CreateSwitch = function()
+    local IsToggled, SetToggled = React.useState(false)
+
+    return React.createElement(Switch, {
+        Toggled = IsToggled,
+        OnToggle = function()
+            SetToggled(not IsToggled)
+        end,
+    })
+end
+
 local story = {
     react = React,
     reactRoblox = ReactRoblox,
@@ -16,9 +27,7 @@ local story = {
 
             BackgroundTransparency = 1,
         }, {
-            Switch = React.createElement(Switch, {
-                Toggled = false,
-            }),
+            Switch = React.createElement(CreateSwitch)
         }, {
             LayoutOrder = React.createElement("UIListLayout", {
                 FillDirection = Enum.FillDirection.Horizontal,

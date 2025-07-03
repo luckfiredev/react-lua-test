@@ -15,7 +15,6 @@ local story = {
     reactRoblox = ReactRoblox,
     controls = controls,
     story = function(props)
-
         return React.createElement("Frame", {
             AnchorPoint = Vector2.new(0.5, 0.5),
             Position = UDim2.new(0.5, 0, 0.5, 0),

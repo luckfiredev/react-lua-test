@@ -18,7 +18,7 @@ export type GamepassProps = {
 
     Purchased: boolean,
     Giftable: boolean,
-    OnPurchase: ((p: boolean) -> ()) -> (),
+    OnPurchase: ((set: boolean) -> ()) -> (),
     OnGift: () -> (),
 }
 
@@ -45,6 +45,10 @@ end
 
 local function Gamepass(props: GamepassProps)
     local ProductInfo, SetProductInfo = useState(nil :: Product?)
+    local Purchased, SetPurchased = useState(props.Purchased)
+
+    local Size = Vector2.new(320, 400)
+    local Rounding = 20
 
     useEffect(function()
         local success, err = pcall(function()
@@ -55,11 +59,6 @@ local function Gamepass(props: GamepassProps)
             warn(err)
         end
     end, {})
-
-    local Size = Vector2.new(320, 400)
-    local Rounding = 20
-
-    local Purchased, SetPurchased = useState(props.Purchased)
 
     local function HandlePurchase()
         if Purchased then
@@ -191,12 +190,12 @@ local function Gamepass(props: GamepassProps)
             Size = UDim2.new(1, 6, 0, 72),
             BackgroundTransparency = 1,
         }, {
-            PurchaseButton = not Purchased and React.createElement("Frame", {
+            PurchasedButton = React.createElement("Frame", {
                 ZIndex = 2,
                 AutomaticSize = Enum.AutomaticSize.XY,
                 BackgroundTransparency = 1,
             }, {
-                Button = React.createElement(Button, {
+                CanPurchase = not Purchased and React.createElement(Button, {
                     Size = UDim2.new(1, 30, 1, 0) ,
                     Icon = "rbxassetid://124876235625151",
                     Text = FormatNumber(ProductInfo.PriceInRobux),
@@ -204,49 +203,33 @@ local function Gamepass(props: GamepassProps)
                     GradientRight = Color3.fromHex("#3FFF0F"),
                     OnClick = HandlePurchase,
                 }),
-            }),
 
-            PurchaseButtonDisabled = Purchased and React.createElement("Frame", {
-                ZIndex = 2,
-                AutomaticSize = Enum.AutomaticSize.XY,
-                BackgroundTransparency = 1,
-            }, {
-                Button = React.createElement(Button, {
+                Owned = Purchased and React.createElement(Button, {
                     Disabled = true,
                     Size = UDim2.new(1, 30, 1, 0) ,
                     Text = "OWNED",
                     GradientLeft = Color3.fromHex("#CFCFCF"),
                     GradientRight = Color3.fromHex("#717171"),
-                    OnClick = HandlePurchase,
                 }),
             }),
 
-            GiftIconButton = props.Giftable and React.createElement("Frame", {
+            GiftButton = React.createElement("Frame", {
+                ZIndex = 2,
                 AutomaticSize = Enum.AutomaticSize.XY,
                 BackgroundTransparency = 1,
             }, {
-                IconButton = React.createElement(Button, {
+                GiftEnabled = props.Giftable and React.createElement(Button, {
                     Icon = "rbxassetid://91578590125441",
                     GradientLeft = Color3.fromHex("#941AFF"),
                     GradientRight = Color3.fromHex("#FF0FB7"),
-                    OnClick = props.OnGift,
+                    OnClick = HandlePurchase,
                 }),
 
-                Layout = React.createElement("UIListLayout", {
-                    HorizontalAlignment = Enum.HorizontalAlignment.Right,
-                }),
-            }),
-
-            GiftIconButtonDisabled = not props.Giftable and React.createElement("Frame", {
-                AutomaticSize = Enum.AutomaticSize.XY,
-                BackgroundTransparency = 1,
-            }, {
-                IconButton = React.createElement(Button, {
+                GiftDisabled = not props.Giftable and React.createElement(Button, {
                     Disabled = true,
                     Icon = "rbxassetid://91578590125441",
                     GradientLeft = Color3.fromHex("#CFCFCF"),
                     GradientRight = Color3.fromHex("#717171"),
-                    OnClick = props.OnGift,
                 }),
 
                 Layout = React.createElement("UIListLayout", {

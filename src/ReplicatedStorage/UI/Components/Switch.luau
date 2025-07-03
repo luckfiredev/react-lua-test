@@ -8,7 +8,6 @@ local Spr = require(ReplicatedStorage.Shared.Packages.spr)
 local Sound = require(ReplicatedStorage.Utility.Sound)
 
 local useRef = React.useRef
-local useState = React.useState
 
 type SwitchProps = {
     Toggled: boolean,
@@ -16,13 +15,9 @@ type SwitchProps = {
     OnToggle: () -> (),
 }
 
--- 121348992695732
-
 function Switch(props: SwitchProps)
     local ToggleRef = useRef(nil)
     local ScaleRef = useRef(nil)
-
-    local IsToggled, SetToggled = useState(props.Toggled)
 
     local HandleHover = function()
         if not ScaleRef.current then
@@ -50,7 +45,7 @@ function Switch(props: SwitchProps)
         end
 
         Spr.target(ToggleRef.current, 0.5, 3, {
-            Position = IsToggled
+            Position = props.Toggled
                 and UDim2.new(1, -50, 0, 0)
                 or nil,
             Size = UDim2.new(0, 50, 0, 40),
@@ -64,7 +59,7 @@ function Switch(props: SwitchProps)
 
         Spr.target(ToggleRef.current, 0.25, 5, {
             Size = UDim2.new(0, 40, 0, 40),
-            Position = IsToggled
+            Position = props.Toggled
                 and UDim2.new(1, -40, 0, 0)
                 or nil,
         })
@@ -79,12 +74,10 @@ function Switch(props: SwitchProps)
             props.OnToggle()
         end
 
-        SetToggled(not IsToggled)
-
         Spr.target(ToggleRef.current, 0.5, 5, {
-            Position = IsToggled
+            Position = props.Toggled
                 and UDim2.new(0, 0, 0, 0)
-                or UDim2.new(1, -40, 0, 0),
+                or UDim2.new(1, -40, 0, 0)
         })
         
         Sound:PlaySound({
@@ -111,6 +104,7 @@ function Switch(props: SwitchProps)
         Toggle = React.createElement("Frame", {
             ZIndex = 100,
             Size = UDim2.new(0, 40, 0, 40),
+            Position = props.Toggled and UDim2.new(1, -40, 0, 0) or UDim2.new(0, 0, 0, 0),
             BackgroundColor3 = Color3.new(1,1,1),
 
             ref = ToggleRef,
@@ -158,7 +152,7 @@ function Switch(props: SwitchProps)
         }),
 
         Gradient = React.createElement("UIGradient", {
-            Color = IsToggled 
+            Color = props.Toggled 
                 and ColorSequence.new{
                     ColorSequenceKeypoint.new(0, Color3.fromHex("#1AFFAF")),
                     ColorSequenceKeypoint.new(1, Color3.fromHex("#3FFF0F")),
