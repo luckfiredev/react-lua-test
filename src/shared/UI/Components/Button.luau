@@ -1,5 +1,6 @@
 --!strict
 
+local SoundService = game:GetService("SoundService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 local Spr = require(ReplicatedStorage.Shared.Packages.spr)
@@ -20,7 +21,6 @@ type ButtonProps = {
 
     children: any,
 }
-
 
 function Button(props: ButtonProps)
     local Radius = 20
@@ -59,6 +59,16 @@ function Button(props: ButtonProps)
         Spr.target(ButtonScaleRef.current, 0.35, 2, {
             Scale = 1.05
         })
+
+        local SwitchSound = Instance.new("Sound")
+        SwitchSound.Parent = SoundService
+        SwitchSound.SoundId = "rbxassetid://17161216230"
+        SwitchSound.Volume = 0.5
+
+        SwitchSound:Play()
+        task.delay(SwitchSound.TimeLength + 3, function()
+            SwitchSound:Destroy()
+        end)
     end
 
     local function HandleHover()
@@ -66,11 +76,21 @@ function Button(props: ButtonProps)
             return
         end
 
+        ButtonHoverRef.current.BackgroundTransparency = 0.85
+
         Spr.target(ButtonScaleRef.current, 1, 5, {
             Scale = 1.05
         })
 
-        ButtonHoverRef.current.BackgroundTransparency = 0.85
+        local SwitchSound = Instance.new("Sound")
+        SwitchSound.Parent = SoundService
+        SwitchSound.SoundId = "rbxassetid://17161204665"
+        SwitchSound.Volume = 0.5
+
+        SwitchSound:Play()
+        task.delay(SwitchSound.TimeLength + 3, function()
+            SwitchSound:Destroy()
+        end)
     end
 
     local function HandleUnhover()

@@ -1,3 +1,6 @@
+--!strict
+
+local SoundService = game:GetService("SoundService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 
@@ -11,6 +14,8 @@ type SwitchProps = {
 
     OnToggle: () -> (),
 }
+
+-- 121348992695732
 
 function Switch(props: SwitchProps)
     local ToggleRef = useRef(nil)
@@ -69,17 +74,27 @@ function Switch(props: SwitchProps)
             return
         end
 
+        if props.OnToggle then
+            props.OnToggle()
+        end
+
+        SetToggled(not IsToggled)
+
         Spr.target(ToggleRef.current, 0.5, 5, {
             Position = IsToggled
                 and UDim2.new(0, 0, 0, 0)
                 or UDim2.new(1, -40, 0, 0),
         })
+        
+        local SwitchSound = Instance.new("Sound")
+        SwitchSound.Parent = SoundService
+        SwitchSound.SoundId = "rbxassetid://121348992695732"
+        SwitchSound.Volume = 0.5
 
-        SetToggled(not IsToggled)
-
-        if props.OnToggle then
-            props.OnToggle()
-        end
+        SwitchSound:Play()
+        task.delay(SwitchSound.TimeLength + 3, function()
+            SwitchSound:Destroy()
+        end)
     end
 
     return React.createElement("ImageButton", {

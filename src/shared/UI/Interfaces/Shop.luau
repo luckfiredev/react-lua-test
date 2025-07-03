@@ -223,8 +223,8 @@ function Shop()
             }, {
                 SpecialHeadingImage = React.createElement("ImageLabel", {
                     ZIndex = 2,
-                    Position = UDim2.new(0, -200, 0, -150),
-                    Size = UDim2.new(0, 400*1.25, 0, 250*1.25),
+                    Position = UDim2.new(0, -195, 0, -150),
+                    Size = UDim2.new(0, 500, 0, 312),
                     Image = "rbxassetid://85482605299777",
                     BackgroundTransparency = 1,
                     Rotation = -5
