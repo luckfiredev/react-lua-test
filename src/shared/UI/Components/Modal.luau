@@ -226,7 +226,7 @@ function Modal(props: ModalProps)
                 TextColor3 = Color3.fromRGB(255, 255, 255),
                 TextSize = 100,
 
-                Rotation = -5,
+                Rotation = -7,
                 BackgroundTransparency = 1,
             }, {
                 Stroke = React.createElement("UIStroke", {
@@ -252,7 +252,7 @@ function Modal(props: ModalProps)
                 TextColor3 = Color3.new(0,0,0),
                 TextSize = 100,
 
-                Rotation = -5,
+                Rotation = -7,
                 BackgroundTransparency = 1,
             }, {
                 Stroke = React.createElement("UIStroke", {
@@ -262,7 +262,7 @@ function Modal(props: ModalProps)
             }),
 
             Scale = React.createElement("UIScale", {
-                Scale = 1.25,
+                Scale = 1.15,
             }),
         }),
 

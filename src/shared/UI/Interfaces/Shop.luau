@@ -221,6 +221,15 @@ function Shop()
                 Text = "SHOP",
                 Accent = Color3.fromHex("#FEC752"),
             }, {
+                SpecialHeadingImage = React.createElement("ImageLabel", {
+                    ZIndex = 2,
+                    Position = UDim2.new(0, -200, 0, -150),
+                    Size = UDim2.new(0, 400*1.25, 0, 250*1.25),
+                    Image = "rbxassetid://85482605299777",
+                    BackgroundTransparency = 1,
+                    Rotation = -5
+                }),
+
                 Content = React.createElement("Frame", {
                     Size = UDim2.new(1, 0, 1, 0),
                     BackgroundTransparency = 1,

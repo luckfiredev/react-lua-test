@@ -7,12 +7,10 @@ local ReactRoblox = require(ReplicatedStorage.Shared.Packages["react-roblox"])
 local Gamepass = require(ReplicatedStorage.Shared.UI.Components.Gamepass)
 
 local controls = {
-    ProductName = "Product Name",
-    ProductDescription = "Product Description",
-    ProductPrice = 100,
+    ProductId = 965978158,
 
-    GradientTop = Color3.fromHex("#00FE00"),
-    GradientBottom = Color3.fromHex("#006EFE"),
+    GradientTop = Color3.fromHex("#fe8c00"),
+    GradientBottom = Color3.fromHex("#fe0000"),
 }
 
 local story = {
@@ -31,11 +29,7 @@ local story = {
                 BackgroundTransparency = 1,
             }, {
                 React.createElement(Gamepass, {
-                    ProductId = 965978158,
-
-                    -- ProductName = props.controls.ProductName,
-                    -- ProductDescription = props.controls.ProductDescription,
-                    -- ProductPrice = props.controls.ProductPrice,
+                    ProductId = props.controls.ProductId,
 
                     GradientTop = props.controls.GradientTop,
                     GradientBottom = props.controls.GradientBottom,

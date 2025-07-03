@@ -85,6 +85,7 @@ local function Gamepass(props: GamepassProps)
                 BackgroundTransparency = 1,
             }, {
                 Name = React.createElement("TextLabel", {
+                    ZIndex = 2,
                     AutomaticSize = Enum.AutomaticSize.Y,
                     Size = UDim2.new(1, 0, 0, 0),
 
@@ -107,6 +108,7 @@ local function Gamepass(props: GamepassProps)
                 }),
 
                 Description = React.createElement("TextLabel", {
+                    ZIndex = 2,
                     Size = UDim2.new(1, 0, 0, Size.Y-80),
 
                     TextXAlignment = Enum.TextXAlignment.Left,
@@ -147,6 +149,7 @@ local function Gamepass(props: GamepassProps)
             }),
 
             Icon = React.createElement("ImageLabel", {
+                ZIndex = 1,
                 Position = UDim2.new(0, 0, 0, 50),
                 Size = UDim2.new(0, Size.X, 0, Size.X),
                 Image = "rbxassetid://" .. ProductInfo.IconImageAssetId,
