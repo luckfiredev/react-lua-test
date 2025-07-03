@@ -29,7 +29,7 @@ local story = {
             }),
 
             UIScale = React.createElement(UIScale, {
-                MobileScaleMultiplier = 15,
+                MobileScaleMultiplier = 1.5,
             }),
         })
     end

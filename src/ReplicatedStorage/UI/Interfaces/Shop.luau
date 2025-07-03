@@ -236,7 +236,7 @@ function Shop()
                 }, {
                     HeadingDivider = React.createElement("Frame", {
                         AutomaticSize = Enum.AutomaticSize.XY,
-                        Size = UDim2.new(1, 0, 0, 32),
+                        Size = UDim2.new(1, -25, 0, 32),
                         BackgroundTransparency = 1,
                     }, {
                         Divider = React.createElement(Divider, {
@@ -266,11 +266,9 @@ function Shop()
                         ScrollBarImageTransparency = 0,
                         BackgroundTransparency = 1,
 
-                        TopImage = "rbxassetid://11054259844",
-                        MidImage = "rbxassetid://11054259460",
-                        BottomImage = "rbxassetid://11054260159",
-
-                        ClipsDescendants = true,
+                        TopImage = "rbxassetid://95060122767444",
+                        MidImage = "rbxassetid://107549054916235",
+                        BottomImage = "rbxassetid://106610897877102",
                     }, {
                         Boosts = React.createElement(Category, {
                             Title = "Boosts",
@@ -307,7 +305,7 @@ function Shop()
             }),
         
             UIScale = React.createElement(UIScale, {
-                MobileScaleMultiplier = 15,
+                MobileScaleMultiplier = 1.5,
             }),
         }),
         
