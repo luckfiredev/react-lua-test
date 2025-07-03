@@ -43,4 +43,4 @@ local CreateSwitch = function()
 end
 
 local root = ReactRoblox.createRoot(handle)
-root:render(React.createElement(CreateSwitch, {}, {}))
+root:render(React.createElement(Shop, {}, {}))

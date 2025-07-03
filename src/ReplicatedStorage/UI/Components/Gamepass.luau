@@ -18,7 +18,7 @@ export type GamepassProps = {
 
     Purchased: boolean,
     Giftable: boolean,
-    OnPurchase: ((set: boolean) -> ()) -> (),
+    OnPurchase: () -> (),
     OnGift: () -> (),
 }
 
@@ -45,7 +45,6 @@ end
 
 local function Gamepass(props: GamepassProps)
     local ProductInfo, SetProductInfo = useState(nil :: Product?)
-    local Purchased, SetPurchased = useState(props.Purchased)
 
     local Size = Vector2.new(320, 400)
     local Rounding = 20
@@ -61,11 +60,11 @@ local function Gamepass(props: GamepassProps)
     end, {})
 
     local function HandlePurchase()
-        if Purchased then
+        if props.Purchased then
             return
         end
 
-        props.OnPurchase(SetPurchased)
+        props.OnPurchase()
     end
     
     return ProductInfo and React.createElement("Frame", {
@@ -195,8 +194,8 @@ local function Gamepass(props: GamepassProps)
                 AutomaticSize = Enum.AutomaticSize.XY,
                 BackgroundTransparency = 1,
             }, {
-                CanPurchase = not Purchased and React.createElement(Button, {
-                    Size = UDim2.new(1, 30, 1, 0) ,
+                CanPurchase = not props.Purchased and React.createElement(Button, {
+                    Size = UDim2.new(1, 30, 1, 0),
                     Icon = "rbxassetid://124876235625151",
                     Text = FormatNumber(ProductInfo.PriceInRobux),
                     GradientLeft = Color3.fromHex("#1AFFAF"),
@@ -204,9 +203,9 @@ local function Gamepass(props: GamepassProps)
                     OnClick = HandlePurchase,
                 }),
 
-                Owned = Purchased and React.createElement(Button, {
+                Owned = props.Purchased and React.createElement(Button, {
                     Disabled = true,
-                    Size = UDim2.new(1, 30, 1, 0) ,
+                    Size = UDim2.new(1, 0, 1, 0) ,
                     Text = "OWNED",
                     GradientLeft = Color3.fromHex("#CFCFCF"),
                     GradientRight = Color3.fromHex("#717171"),
