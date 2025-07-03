@@ -205,7 +205,7 @@ local function Gamepass(props: GamepassProps)
 
                 Owned = props.Purchased and React.createElement(Button, {
                     Disabled = true,
-                    Size = UDim2.new(1, 0, 1, 0) ,
+                    Size = UDim2.new(1, 30, 1, 0) ,
                     Text = "OWNED",
                     GradientLeft = Color3.fromHex("#CFCFCF"),
                     GradientRight = Color3.fromHex("#717171"),
