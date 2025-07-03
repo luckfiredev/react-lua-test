@@ -193,51 +193,39 @@ local function Gamepass(props: GamepassProps)
         }, {
             PurchaseButton = not Purchased and React.createElement("Frame", {
                 ZIndex = 2,
-                AutomaticSize = props.Giftable and Enum.AutomaticSize.XY or Enum.AutomaticSize.Y,
-                Size = not props.Giftable and UDim2.new(1, 0, 1, 0) or nil,
+                AutomaticSize = Enum.AutomaticSize.XY,
                 BackgroundTransparency = 1,
             }, {
                 Button = React.createElement(Button, {
-                    Size = not Purchased and props.Giftable and UDim2.new(1, -3, 1, 0) or UDim2.new(1, 0, 1, 0),
+                    Size = UDim2.new(1, 30, 1, 0) ,
                     Icon = "rbxassetid://124876235625151",
                     Text = FormatNumber(ProductInfo.PriceInRobux),
                     GradientLeft = Color3.fromHex("#1AFFAF"),
                     GradientRight = Color3.fromHex("#3FFF0F"),
                     OnClick = HandlePurchase,
                 }),
-
-                Layout = not props.Giftable and React.createElement("UIListLayout", {
-                    HorizontalAlignment = Enum.HorizontalAlignment.Center,
-                    VerticalAlignment = Enum.VerticalAlignment.Center,
-                }),
             }),
 
-            GiftButton = props.Giftable and Purchased and React.createElement("Frame", {
+            PurchaseButtonDisabled = Purchased and React.createElement("Frame", {
                 ZIndex = 2,
-                Size = UDim2.new(1, 0, 1, 0),
+                AutomaticSize = Enum.AutomaticSize.XY,
                 BackgroundTransparency = 1,
             }, {
                 Button = React.createElement(Button, {
-                    Size = UDim2.new(1, 0, 1, 0),
-                    Icon = "rbxassetid://91578590125441",
-                    Text = "GIFT",
-                    GradientLeft = Color3.fromHex("#941AFF"),
-                    GradientRight = Color3.fromHex("#FF0FB7"),
+                    Disabled = true,
+                    Size = UDim2.new(1, 30, 1, 0) ,
+                    Text = "OWNED",
+                    GradientLeft = Color3.fromHex("#CFCFCF"),
+                    GradientRight = Color3.fromHex("#717171"),
                     OnClick = HandlePurchase,
-                }),
-
-                Layout = React.createElement("UIListLayout", {
-                    HorizontalAlignment = Enum.HorizontalAlignment.Center,
-                    VerticalAlignment = Enum.VerticalAlignment.Center,
                 }),
             }),
 
-            GiftIconButton = props.Giftable and not Purchased and React.createElement("Frame", {
+            GiftIconButton = props.Giftable and React.createElement("Frame", {
                 AutomaticSize = Enum.AutomaticSize.XY,
                 BackgroundTransparency = 1,
             }, {
                 IconButton = React.createElement(Button, {
-                    Size = UDim2.new(1, -3, 1, 0),
                     Icon = "rbxassetid://91578590125441",
                     GradientLeft = Color3.fromHex("#941AFF"),
                     GradientRight = Color3.fromHex("#FF0FB7"),
@@ -249,14 +237,13 @@ local function Gamepass(props: GamepassProps)
                 }),
             }),
 
-            OwnedButton = not props.Giftable and Purchased and React.createElement("Frame", {
-                Size = UDim2.new(1, 0, 1, 0),
+            GiftIconButtonDisabled = not props.Giftable and React.createElement("Frame", {
+                AutomaticSize = Enum.AutomaticSize.XY,
                 BackgroundTransparency = 1,
             }, {
-                Button = React.createElement(Button, {
+                IconButton = React.createElement(Button, {
                     Disabled = true,
-                    Size = UDim2.new(1, 0, 1, 0),
-                    Text = "OWNED",
+                    Icon = "rbxassetid://91578590125441",
                     GradientLeft = Color3.fromHex("#CFCFCF"),
                     GradientRight = Color3.fromHex("#717171"),
                     OnClick = props.OnGift,
@@ -273,8 +260,6 @@ local function Gamepass(props: GamepassProps)
                 VerticalAlignment = Enum.VerticalAlignment.Center,
                 HorizontalAlignment = Enum.HorizontalAlignment.Center,
                 HorizontalFlex = Enum.UIFlexAlignment.Fill,
-
-                Padding = UDim.new(0, 3),
             }),
         })
     })

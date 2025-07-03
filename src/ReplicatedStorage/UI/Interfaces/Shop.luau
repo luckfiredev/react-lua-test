@@ -16,7 +16,7 @@ local shopItems: { Gamepass.GamepassProps } = {
         GradientBottom = Color3.fromHex("#fe0000"),
 
         Purchased = false,
-        Giftable = true,
+        Giftable = false,
 
         OnPurchase = function(setPurchased)
         end,
@@ -29,7 +29,7 @@ local shopItems: { Gamepass.GamepassProps } = {
         GradientTop = Color3.fromHex("#fe00fe"),
         GradientBottom = Color3.fromHex("#5000fe"),
 
-        Purchased = false,
+        Purchased = true,
         Giftable = true,
 
         OnPurchase = function(setPurchased)
@@ -43,8 +43,8 @@ local shopItems: { Gamepass.GamepassProps } = {
         GradientTop = Color3.fromHex("#fe0000"),
         GradientBottom = Color3.fromHex("#fecb00"),
 
-        Purchased = false,
-        Giftable = true,
+        Purchased = true,
+        Giftable = false,
 
         OnPurchase = function(setPurchased)
         end,
