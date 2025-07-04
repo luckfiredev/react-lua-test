@@ -4,7 +4,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 local Spr = require(ReplicatedStorage.Shared.Packages.spr)
 
-local Rubik = require(ReplicatedStorage.UI.Fonts.Rubik)
+local Rubik = require(ReplicatedStorage.Fonts.Rubik)
 local Sound = require(ReplicatedStorage.Utility.Sound)
 
 type ButtonProps = {

@@ -5,8 +5,9 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local storybook = {
    name = "UI",
    storyRoots = {
-      ReplicatedStorage.Storybook.Interfaces,
+      ReplicatedStorage.Storybook.Popups,
       ReplicatedStorage.Storybook.Components,
+      ReplicatedStorage.Storybook.Gameplay,
    },
    groupRoots = true,
 }

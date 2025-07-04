@@ -8,7 +8,7 @@ local useState = React.useState
 local useEffect = React.useEffect
 
 local Button = require(ReplicatedStorage.UI.Components.Button)
-local Rubik = require(ReplicatedStorage.UI.Fonts.Rubik)
+local Rubik = require(ReplicatedStorage.Fonts.Rubik)
 
 export type GamepassProps = {
     ProductId: number,

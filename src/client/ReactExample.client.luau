@@ -7,8 +7,11 @@ local ReactRoblox = require(ReplicatedStorage.Shared.Packages["react-roblox"])
 
 local UIScale = require(ReplicatedStorage.UI.Components.UIScale)
 
-local Shop = require(ReplicatedStorage.UI.Interfaces.Shop)
+local Shop = require(ReplicatedStorage.UI.Popups.Shop)
 local Switch = require(ReplicatedStorage.UI.Components.Switch)
+local Sidebar = require(ReplicatedStorage.UI.Components.Sidebar)
+
+local MainLayout = require(ReplicatedStorage.UI.Gameplay.MainLayout)
 
 local handle = Instance.new("ScreenGui",Players.LocalPlayer.PlayerGui)
 handle.IgnoreGuiInset = true
@@ -43,4 +46,4 @@ local CreateSwitch = function()
 end
 
 local root = ReactRoblox.createRoot(handle)
-root:render(React.createElement(Shop, {}, {}))
+root:render(React.createElement(MainLayout, {}, {}))

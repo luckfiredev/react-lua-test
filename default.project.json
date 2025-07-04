@@ -18,6 +18,9 @@
       },
       "Utility": {
         "$path": "src/ReplicatedStorage/Utility"
+      },
+      "Fonts": {
+        "$path": "src/ReplicatedStorage/Fonts"
       }
     },
 

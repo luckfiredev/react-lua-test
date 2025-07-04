@@ -1,39 +1,32 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 
-local useEffect = React.useEffect
-
 type BackgroundProps = {
     GradientLeft: Color3,
     GradientRight: Color3,
 }
 
-function Background(props: BackgroundProps)
-    useEffect(function()
-        local Lighting = game:GetService("Lighting")
-        local Blur = Instance.new("BlurEffect")
+function Background(props: BackgroundProps, ref: any?)
+    if not ref then
+        ref = React.createRef()
+    end
 
-        Blur.Size = 50
-        Blur.Parent = Lighting
-
-        return function()
-            Blur:Destroy()
-        end
-    end, {})
-
-    return React.createElement("Frame", {
-        ZIndex = -100, -- This is awful.
+    return React.createElement("ImageLabel", {
+        ZIndex = -1,
         AnchorPoint = Vector2.new(0.5, 0.5),
         Position = UDim2.new(0.5, 0, 0.5, 0),
         Size = UDim2.new(1, 0, 1, 0),
-        BackgroundTransparency = 0.5,
+        BackgroundTransparency = 1,
+
+        ref = ref,
     }, {
         Pattern = React.createElement("ImageLabel", {
+            ZIndex = -1,
             AnchorPoint = Vector2.new(0.5, 0.5),
             Position = UDim2.new(0.5, 0, 0.5, 0),
 
             Image = "rbxassetid://94642687357965",
-            ImageTransparency = 0.75,
+            ImageTransparency = 1,
             Size = UDim2.new(5, 0, 5, 0),
             TileSize = UDim2.new(0, 10, 0, 10),
             ScaleType = Enum.ScaleType.Tile,
@@ -52,4 +45,4 @@ function Background(props: BackgroundProps)
     })
 end
 
-return Background
+return React.forwardRef(Background)

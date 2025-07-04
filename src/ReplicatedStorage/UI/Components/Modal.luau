@@ -4,7 +4,9 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 local Spr = require(ReplicatedStorage.Shared.Packages.spr)
 
-local Rubik = require(ReplicatedStorage.UI.Fonts.Rubik)
+local Rubik = require(ReplicatedStorage.Fonts.Rubik)
+
+local Sound = require(ReplicatedStorage.Utility.Sound)
 
 type ModalProps = {
     Text: string,
@@ -38,6 +40,11 @@ function Modal(props: ModalProps)
         Spr.target(ExitScaleRef.current, ExitButtonDamp, ExitButtonFreq, {
             Scale = 1.1
         })
+
+        Sound:PlaySound({
+            Id = "17161216230",
+            Volume = 0.5,
+        })
     end
 
     local HandleExitHoldClick = function()
@@ -57,6 +64,11 @@ function Modal(props: ModalProps)
 
         Spr.target(ExitScaleRef.current, ExitButtonDamp, ExitButtonFreq, {
             Scale = 1.1
+        })
+
+        Sound:PlaySound({
+            Id = "17161204665",
+            Volume = 0.5,
         })
     end
 
@@ -221,7 +233,7 @@ function Modal(props: ModalProps)
             Text = React.createElement("TextLabel", {
                 ZIndex = 10,
                 AutomaticSize = Enum.AutomaticSize.XY,
-                FontFace = Rubik.Bold,
+                FontFace = Rubik.ExtraBold,
                 Text = props.Text,
                 TextColor3 = Color3.fromRGB(255, 255, 255),
                 TextSize = 100,
@@ -247,7 +259,7 @@ function Modal(props: ModalProps)
                 ZIndex = 9,
                 AutomaticSize = Enum.AutomaticSize.XY,
                 Position = UDim2.new(0, -5, 0, 10),
-                FontFace = Rubik.Bold,
+                FontFace = Rubik.ExtraBold,
                 Text = props.Text,
                 TextColor3 = Color3.new(0,0,0),
                 TextSize = 100,

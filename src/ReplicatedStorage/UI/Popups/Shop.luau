@@ -1,12 +1,19 @@
+--!strict
+local Lighting = game:GetService("Lighting")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
+local Spr = require(ReplicatedStorage.Shared.Packages.spr)
 
-local Rubik = require(ReplicatedStorage.UI.Fonts.Rubik)
+local useEffect, useRef = React.useEffect, React.useRef
+
+local Rubik = require(ReplicatedStorage.Fonts.Rubik)
 local UIScale = require(ReplicatedStorage.UI.Components.UIScale)
 local Background = require(ReplicatedStorage.UI.Components.Background)
 local Modal = require(ReplicatedStorage.UI.Components.Modal)
 local Divider = require(ReplicatedStorage.UI.Components.Divider)
 local Gamepass = require(ReplicatedStorage.UI.Components.Gamepass)
+
+local Sound = require(ReplicatedStorage.Utility.Sound)
 
 local shopItems: { Gamepass.GamepassProps } = { 
     {
@@ -18,7 +25,7 @@ local shopItems: { Gamepass.GamepassProps } = {
         Purchased = false,
         Giftable = false,
 
-        OnPurchase = function(setPurchased)
+        OnPurchase = function()
         end,
         OnGift = function()
         end,
@@ -32,7 +39,7 @@ local shopItems: { Gamepass.GamepassProps } = {
         Purchased = true,
         Giftable = true,
 
-        OnPurchase = function(setPurchased)
+        OnPurchase = function()
         end,
         OnGift = function()
         end,
@@ -46,7 +53,7 @@ local shopItems: { Gamepass.GamepassProps } = {
         Purchased = true,
         Giftable = false,
 
-        OnPurchase = function(setPurchased)
+        OnPurchase = function()
         end,
         OnGift = function()
         end,
@@ -60,7 +67,7 @@ local shopItems: { Gamepass.GamepassProps } = {
         Purchased = false,
         Giftable = true,
 
-        OnPurchase = function(setPurchased)
+        OnPurchase = function()
         end,
         OnGift = function()
         end,
@@ -74,7 +81,7 @@ local shopItems: { Gamepass.GamepassProps } = {
         Purchased = false,
         Giftable = true,
 
-        OnPurchase = function(setPurchased)
+        OnPurchase = function()
         end,
         OnGift = function()
         end,
@@ -88,7 +95,7 @@ local shopItems: { Gamepass.GamepassProps } = {
         Purchased = false,
         Giftable = true,
 
-        OnPurchase = function(setPurchased)
+        OnPurchase = function()
         end,
         OnGift = function()
         end,
@@ -102,7 +109,7 @@ local shopItems: { Gamepass.GamepassProps } = {
         Purchased = false,
         Giftable = true,
 
-        OnPurchase = function(setPurchased)
+        OnPurchase = function()
         end,
         OnGift = function()
         end,
@@ -204,22 +211,94 @@ function Category(props: CatgegoryProps)
     })
 end
 
-function Shop()
+type ShopProps = {
+    OnClose: () -> (),
+}
+
+function Shop(props: ShopProps)
+    local ShopRef = useRef(nil)
+    local BackgroundRef = useRef(nil)
+
+    local Blur = Instance.new("BlurEffect")
+
     local Items = {}
     for _, item in ipairs(shopItems) do
         table.insert(Items, React.createElement(Gamepass, item))
     end
 
+    useEffect(function()
+        if not BackgroundRef.current or not ShopRef.current then
+            return
+        end
+
+        Blur.Parent = Lighting
+        Spr.target(Blur, 0.75, 2.5, {
+            Size = 50,
+        })
+
+        Spr.target(BackgroundRef.current, 1, 2.5, {
+            BackgroundTransparency = 0.5,
+        })
+
+        Spr.target(BackgroundRef.current.Pattern, 1, 2.5, {
+            ImageTransparency = 0.75,
+        })
+        
+        Spr.target(ShopRef.current, 0.75, 2.5, {
+            Position = UDim2.new(0.5, 0, 0.5, 0),
+        })
+
+        Sound:PlaySound({
+            Id = "8382337318",
+            Volume = 0.5,
+        })
+
+        return function()
+            Blur:Destroy()
+        end
+    end, {})
+
+    local HandleClose = function()
+        if not BackgroundRef.current or not ShopRef.current then
+            return
+        end
+
+        Spr.target(Blur, 1, 2.5, {
+            Size = 0,
+        })
+
+        Spr.target(BackgroundRef.current, 1, 2.5, {
+            BackgroundTransparency = 1,
+        })
+
+        Spr.target(BackgroundRef.current.Pattern, 1, 2.5, {
+            ImageTransparency = 1,
+        })
+
+        Spr.target(ShopRef.current, 1, 2.5, {
+            Position = UDim2.new(0.5, 0, -2, 0),
+        })
+
+        if props.OnClose then
+            task.delay(0.25, props.OnClose)
+        end
+    end
+
     return React.createElement(React.Fragment, {}, {
         Shop = React.createElement("Frame", {
+            ZIndex = 1,
             AnchorPoint = Vector2.new(0.5, 0.5),
-            Position = UDim2.new(0.5, 0, 0.5, 0),
+            Position = UDim2.new(0.5, 0, 2, 0),
             Size = UDim2.new(0, 1200, 0, 650),
             BackgroundTransparency = 1,
+
+            ref = ShopRef,
         }, {
             Modal = React.createElement(Modal, {
                 Text = "SHOP",
                 Accent = Color3.fromHex("#FEC752"),
+
+                OnClose = HandleClose,
             }, {
                 SpecialHeadingImage = React.createElement("ImageLabel", {
                     ZIndex = 2,
@@ -312,6 +391,8 @@ function Shop()
         Background = React.createElement(Background, {
             GradientLeft = Color3.fromHex("#BA24FF"),
             GradientRight = Color3.fromHex("#FFA82F"),
+
+            ref = BackgroundRef,
         }),
     })
 end
