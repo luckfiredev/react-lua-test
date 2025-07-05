@@ -302,7 +302,7 @@ function Shop(props: ShopProps)
             }, {
                 SpecialHeadingImage = React.createElement("ImageLabel", {
                     ZIndex = 2,
-                    Position = UDim2.new(0, -195, 0, -150),
+                    Position = UDim2.new(0, -195, 0, -155),
                     Size = UDim2.new(0, 500, 0, 312),
                     Image = "rbxassetid://85482605299777",
                     BackgroundTransparency = 1,

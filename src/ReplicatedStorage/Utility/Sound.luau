@@ -1,5 +1,6 @@
 --!strict
 
+local RunService = game:GetService("RunService")
 local SoundService = game:GetService("SoundService")
 
 local Sound = {}
@@ -10,6 +11,12 @@ type SoundProps = {
 }
 
 function Sound:PlaySound(p: SoundProps)
+    -- Prevents the sound from playing when not playtesting.
+    -- Primary use-case is for Storybook. It attempts to play but they do not playback.
+    if not RunService:IsRunning() then
+        return
+    end
+
     local Sound = Instance.new("Sound")
 
     Sound.SoundId = "rbxassetid://" .. p.Id
