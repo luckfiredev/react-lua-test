@@ -21,8 +21,8 @@ function Background(props: BackgroundProps, ref: any?)
             return
         end
 
-        local conn = RunService.RenderStepped:Connect(function()
-            PatternRef.current.Position += UDim2.new(0.0005, 0, -0.0005, 0)
+        local conn = RunService.RenderStepped:Connect(function(Dt)
+            PatternRef.current.Position += UDim2.new(0.0005 * Dt * 60, 0, -0.0005 * Dt * 60, 0)
             if PatternRef.current.Position.X.Scale >= 1.5 or PatternRef.current.Position.Y.Scale <= -0.5 then
                 PatternRef.current.Position = UDim2.new(0.5, 0, 0.5, 0)
             end
