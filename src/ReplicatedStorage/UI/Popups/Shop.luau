@@ -136,7 +136,7 @@ function Category(props: CatgegoryProps)
         BackgroundTransparency = 1,
     }, {
         Heading = React.createElement("Frame", {
-            Size = UDim2.new(1, 0, 0, 50),
+            AutomaticSize = Enum.AutomaticSize.XY,
             BackgroundTransparency = 1,
         }, {
             Icon = React.createElement("ImageLabel", {
@@ -167,10 +167,6 @@ function Category(props: CatgegoryProps)
                 HorizontalAlignment = Enum.HorizontalAlignment.Left,
                 VerticalAlignment = Enum.VerticalAlignment.Center,
                 Padding = UDim.new(0, 5),
-            }),
-
-            Padding = React.createElement("UIPadding", {
-                PaddingLeft = UDim.new(0, 2),
             }),
         }),
 
@@ -203,7 +199,7 @@ function Category(props: CatgegoryProps)
             }),
 
             Padding = React.createElement("UIPadding", {
-                PaddingTop = UDim.new(0, 20),
+                PaddingTop = UDim.new(0, 56),
                 PaddingRight = UDim.new(0, 3),
                 PaddingLeft = UDim.new(0, 3),
             }),

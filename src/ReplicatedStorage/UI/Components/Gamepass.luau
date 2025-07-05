@@ -3,6 +3,7 @@
 local MarketplaceService = game:GetService("MarketplaceService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
+local Format = require(ReplicatedStorage.Utility.Format)
 
 local useState = React.useState
 local useEffect = React.useEffect
@@ -38,11 +39,6 @@ type Product = {
     IconImageAssetId: string,
 }
 
-local function FormatNumber(num: number)
-    return tostring(math.floor(num)):reverse():gsub("(%d%d%d)","%1,")
-        :gsub(",(%-?)$","%1"):reverse()
-end
-
 local function Gamepass(props: GamepassProps)
     local ProductInfo, SetProductInfo = useState(nil :: Product?)
 
@@ -60,7 +56,7 @@ local function Gamepass(props: GamepassProps)
     end, {})
 
     local function HandlePurchase()
-        if props.Purchased then
+        if props.Purchased or not props.OnPurchase then
             return
         end
 
@@ -68,13 +64,11 @@ local function Gamepass(props: GamepassProps)
     end
     
     return ProductInfo and React.createElement("Frame", {
-        Size = UDim2.new(0, Size.X, 0, Size.Y+72),
+        Size = UDim2.new(0, Size.X, 0, Size.Y+36),
         BackgroundTransparency = 1,
     }, { 
         Content = React.createElement("Frame", {
             Size = UDim2.new(0, Size.X, 0, Size.Y),
-            AnchorPoint = Vector2.new(0.5, 0.5),
-            Position = UDim2.new(0.5, 0, 0.5, 0),
             BackgroundColor3 = Color3.new(1,1,1),
         }, {
             ProductDetails = React.createElement("Frame", {
@@ -185,7 +179,7 @@ local function Gamepass(props: GamepassProps)
         }),
 
         Buttons = React.createElement("Frame", {
-            Position = UDim2.new(0, -3, 0, Size.Y),
+            Position = UDim2.new(0, -3, 0, Size.Y-36),
             Size = UDim2.new(1, 6, 0, 72),
             BackgroundTransparency = 1,
         }, {
@@ -197,7 +191,7 @@ local function Gamepass(props: GamepassProps)
                 CanPurchase = not props.Purchased and React.createElement(Button, {
                     Size = UDim2.new(1, 30, 1, 0),
                     Icon = "rbxassetid://124876235625151",
-                    Text = FormatNumber(ProductInfo.PriceInRobux),
+                    Text = Format:Number(ProductInfo.PriceInRobux),
                     GradientLeft = Color3.fromHex("#1AFFAF"),
                     GradientRight = Color3.fromHex("#3FFF0F"),
                     OnClick = HandlePurchase,

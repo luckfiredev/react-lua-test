@@ -9,7 +9,6 @@ local UIScale = require(ReplicatedStorage.UI.Components.UIScale)
 
 local Shop = require(ReplicatedStorage.UI.Popups.Shop)
 local Switch = require(ReplicatedStorage.UI.Components.Switch)
-local Sidebar = require(ReplicatedStorage.UI.Components.Sidebar)
 
 local MainLayout = require(ReplicatedStorage.UI.Gameplay.MainLayout)
 

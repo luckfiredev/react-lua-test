@@ -7,6 +7,13 @@ local ReactRoblox = require(ReplicatedStorage.Shared.Packages["react-roblox"])
 local DevProduct = require(ReplicatedStorage.UI.Components.DevProduct)
 
 local controls = {
+    ProductId = 1573206663,
+
+    GradientTop = Color3.fromHex("#00FE00"),
+    GradientBottom = Color3.fromHex("#006EFE"),
+
+    Purchased = false,
+    Giftable = false,
 }
 
 local story = {
@@ -24,8 +31,7 @@ local story = {
                 Position = UDim2.new(0.5, 0, 0.5, 0),
                 BackgroundTransparency = 1,
             }, {
-                React.createElement(DevProduct, {
-                })
+                React.createElement(DevProduct, props.controls)
             })
         })
     end
