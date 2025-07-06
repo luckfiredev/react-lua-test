@@ -3,12 +3,19 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local React = require(ReplicatedStorage.Shared.Packages.react)
 
-local Shop = require(ReplicatedStorage.UI.Popups.Shop)
 local SidebarItem = require(ReplicatedStorage.UI.Components.SidebarItem)
+local Shop = require(ReplicatedStorage.UI.Popups.Shop)
+local Settings = require(ReplicatedStorage.UI.Popups.Settings)
 
 local useState = React.useState
 
-type Popups = nil | "Shop" | "Shop2"
+local PopupType = {
+    None = nil,
+    Shop = "Shop",
+    Settings = "Settings",
+}
+
+type Popups = "Shop" | "Settings"
 
 function MainLayout()
     local OpenedPopup, SetOpenPopup = useState(nil :: Popups?)
@@ -35,7 +42,7 @@ function MainLayout()
                         return
                     end
 
-                    SetOpenPopup("Shop" :: Popups)
+                    SetOpenPopup(PopupType.Shop :: Popups)
                 end,
             }),
 
@@ -47,6 +54,13 @@ function MainLayout()
             D_Settings = React.createElement(SidebarItem, {
                 Text = "SETTINGS",
                 IconId = "72912048671835",
+                OnClick = function ()
+                    if OpenedPopup then
+                        return
+                    end
+
+                    SetOpenPopup(PopupType.Settings :: Popups)
+                end,
             }),
 
             Layout = React.createElement("UIListLayout", {
@@ -57,11 +71,19 @@ function MainLayout()
             }),
         }),
 
-        Shop = OpenedPopup == "Shop" and React.createElement(Shop, {
-            OnClose = function()
-                SetOpenPopup(nil :: Popups)
-            end,
-        }),
+        Shop = OpenedPopup == PopupType.Shop and
+            React.createElement(Shop, {
+                OnClose = function()
+                    SetOpenPopup(nil :: Popups?)
+                end,
+            }),
+
+        Settings = OpenedPopup == PopupType.Settings and
+            React.createElement(Settings, {
+                OnClose = function()
+                    SetOpenPopup(nil :: Popups?)
+                end,
+            }),
     })
 end
 

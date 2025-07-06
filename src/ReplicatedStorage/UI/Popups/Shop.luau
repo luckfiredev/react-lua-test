@@ -310,8 +310,7 @@ function Shop(props: ShopProps)
                     BackgroundTransparency = 1,
                 }, {
                     HeadingDivider = React.createElement("Frame", {
-                        AutomaticSize = Enum.AutomaticSize.XY,
-                        Size = UDim2.new(1, -25, 0, 32),
+                        Size = UDim2.new(1, -25, 0, 28+32),
                         BackgroundTransparency = 1,
                     }, {
                         Divider = React.createElement(Divider, {
