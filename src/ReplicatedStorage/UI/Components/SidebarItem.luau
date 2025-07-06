@@ -23,13 +23,42 @@ type SidebarItemProps = {
 function SidebarItem(props: SidebarItemProps)
     local ScaleRef = useRef(nil)
 
-    local HandleHover = function()
+    local function HandleHoldClick()
         if not ScaleRef.current then
             return
         end
 
-        Spr.target(ScaleRef.current, 1, 3, {
-            Scale = 1.1
+        Spr.target(ScaleRef.current, 2.5, 5, {
+            Scale = 0.95
+        })
+    end
+
+    local function HandleClick()
+        if props.OnClick then
+            props.OnClick()
+        end
+
+        if not ScaleRef.current then
+            return
+        end
+
+        Spr.target(ScaleRef.current, 0.35, 2, {
+            Scale = 1.05
+        })
+
+        Sound:PlaySound({
+            Id = "17161216230",
+            Volume = 0.5,
+        })
+    end
+
+    local function HandleHover()
+        if not ScaleRef.current then
+            return
+        end
+
+        Spr.target(ScaleRef.current, 1, 5, {
+            Scale = 1.05
         })
 
         Sound:PlaySound({
@@ -38,24 +67,13 @@ function SidebarItem(props: SidebarItemProps)
         })
     end
 
-    local HandleUnhover = function()
+    local function HandleUnhover()
         if not ScaleRef.current then
             return
         end
 
-        Spr.target(ScaleRef.current, 1, 3, {
+        Spr.target(ScaleRef.current, 1, 5, {
             Scale = 1
-        })
-    end
-
-    local HandleClick = function()
-        if props.OnClick then
-            props.OnClick()
-        end
-
-        Sound:PlaySound({
-            Id = "17161216230",
-            Volume = 0.5,
         })
     end
 
@@ -69,10 +87,10 @@ function SidebarItem(props: SidebarItemProps)
             ImageColor3 = Color3.new(1,1,1),
             Image = "rbxassetid://" .. props.IconId,
 
+            [React.Event.Activated] = HandleClick,
+            [React.Event.MouseButton1Down] = HandleHoldClick,
             [React.Event.MouseEnter] = HandleHover,
             [React.Event.MouseLeave] = HandleUnhover,
-
-            [React.Event.Activated] = HandleClick,
         }, {
             NoticeIcon = props.HasNotice and React.createElement("ImageLabel", {
                 AnchorPoint = Vector2.new(0.5, 0.5),

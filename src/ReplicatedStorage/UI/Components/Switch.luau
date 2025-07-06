@@ -19,7 +19,7 @@ function Switch(props: SwitchProps)
     local ToggleRef = useRef(nil)
     local ScaleRef = useRef(nil)
 
-    local HandleHover = function()
+    local function HandleHover()
         if not ScaleRef.current then
             return
         end
@@ -29,7 +29,7 @@ function Switch(props: SwitchProps)
         })
     end
     
-    local HandleUnhover = function()
+    local function HandleUnhover()
         if not ScaleRef.current then
             return
         end
@@ -39,7 +39,7 @@ function Switch(props: SwitchProps)
         })
     end
 
-    local HandleHoldClick = function()
+    local function HandleHoldClick()
         if not ToggleRef.current then
             return
         end
@@ -52,7 +52,7 @@ function Switch(props: SwitchProps)
         })
     end
 
-    local HandleReleaseClick = function()
+    local function HandleReleaseClick()
         if not ToggleRef.current then
             return
         end
@@ -65,7 +65,7 @@ function Switch(props: SwitchProps)
         })
     end
 
-    local HandleToggle = function()
+    local function HandleToggle()
         if not ToggleRef.current then
             return
         end

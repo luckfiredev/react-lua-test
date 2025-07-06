@@ -33,7 +33,7 @@ function Button(props: ButtonProps)
 
     local ButtonTransparency = props.Disabled and 0.5 or 0
 
-    local function HoldClick()
+    local function HandleHoldClick()
         if props.Disabled or not ButtonScaleRef.current then
             return
         end
@@ -115,7 +115,7 @@ function Button(props: ButtonProps)
             BackgroundTransparency = 1,
 
             [React.Event.Activated] = HandleClick,
-            [React.Event.MouseButton1Down] = HoldClick,
+            [React.Event.MouseButton1Down] = HandleHoldClick,
             [React.Event.MouseEnter] = HandleHover,
             [React.Event.MouseLeave] = HandleUnhover,
         }, {
